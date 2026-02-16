@@ -438,13 +438,12 @@ function WeightingRuleSlide() {
   }, []);
 
   const weights = [
-    { need: "Safety", w: 3, color: "#ef4444" },
-    { need: "Cost", w: 2, color: "#f59e0b" },
-    { need: "Durability", w: 2, color: "#3b82f6" },
-    { need: "Ease of Use", w: 2, color: "#8b5cf6" },
-    { need: "Performance", w: 1, color: "#10b981" },
+    { need: "Safety", w: 9, color: "#ef4444" },
+    { need: "Cost", w: 7, color: "#f59e0b" },
+    { need: "Durability", w: 6, color: "#3b82f6" },
+    { need: "Ease of Use", w: 8, color: "#8b5cf6" },
+    { need: "Performance", w: 5, color: "#10b981" },
   ];
-  const total = weights.reduce((s, w) => s + w.w, 0);
 
   return (
     <div style={{ padding: "40px 48px" }}>
@@ -481,13 +480,15 @@ function WeightingRuleSlide() {
           }}
         >
           <div style={{ fontSize: 20, fontWeight: 700, marginBottom: 8 }}>
-            Key Rule: All weights must add up to 10
+            Key Rule: Rate Each Need 1–10 for Importance
           </div>
           <div style={{ fontSize: 15, opacity: 0.9, lineHeight: 1.6 }}>
-            Each customer need gets a weight from <strong>1 to 10</strong>, but
-            the total across all your needs must equal{" "}
-            <strong>exactly 10</strong>. This forces your team to make real
-            trade-offs about what matters most.
+            Each customer need gets a weight from <strong>1 to 10</strong>{" "}
+            based on how important it is to your team.{" "}
+            <strong>10 = extremely important</strong>,{" "}
+            <strong>1 = low but still important</strong>. Weights are
+            independent — they do <strong>not</strong> need to add up to any
+            particular number.
           </div>
         </div>
       </FadeIn>
@@ -571,26 +572,14 @@ function WeightingRuleSlide() {
                 padding: "10px 16px",
                 background: TEAL_LIGHT,
                 borderRadius: 10,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
+                fontSize: 13,
+                color: TEAL,
+                lineHeight: 1.5,
               }}
             >
-              <span
-                style={{ fontSize: 15, fontWeight: 700, color: TEAL }}
-              >
-                Total:
-              </span>
-              <span
-                style={{
-                  fontSize: 22,
-                  fontWeight: 800,
-                  color: animStep >= 5 ? TEAL : "#94a3b8",
-                  transition: "color 0.3s",
-                }}
-              >
-                {animStep >= 5 ? total : "—"} / 10 ✓
-              </span>
+              Each weight is an <strong>independent</strong> 1–10 rating.
+              Higher weight = more important to your team's design
+              decisions.
             </div>
           </FadeIn>
         </div>
@@ -613,14 +602,15 @@ function WeightingRuleSlide() {
                 marginBottom: 6,
               }}
             >
-              Why add up to 10?
+              Why 1–10?
             </div>
             <div
               style={{ fontSize: 13, color: "#78350f", lineHeight: 1.5 }}
             >
-              It forces your team to prioritize. If everything is
-              "important," then nothing is. The constraint makes you have
-              honest conversations about what truly matters for your project.
+              The 1–10 scale lets your team express how important each need
+              is independently. A 10 means "absolutely critical" and a 1
+              means "nice to have but not a dealbreaker." This reflects your
+              engineering judgment.
             </div>
           </div>
         </FadeIn>
@@ -702,27 +692,27 @@ function CNTableSlide() {
               {[
                 {
                   n: "Safety",
-                  w: 3,
+                  w: 9,
                   why: "Top priority — K-12 students are the end users",
                 },
                 {
                   n: "Cost",
-                  w: 2,
+                  w: 7,
                   why: "Must stay within the class budget",
                 },
                 {
                   n: "Durability",
-                  w: 2,
+                  w: 6,
                   why: "Robot needs to survive repeated demos",
                 },
                 {
                   n: "Ease of Use",
-                  w: 2,
+                  w: 8,
                   why: "Young students should operate it independently",
                 },
                 {
                   n: "Performance",
-                  w: 1,
+                  w: 5,
                   why: "Important, but less critical than safety",
                 },
               ].map((row, i) => (
@@ -785,33 +775,7 @@ function CNTableSlide() {
                 }}
               >
                 <td
-                  colSpan={2}
-                  style={{
-                    padding: "12px 20px",
-                    fontWeight: 800,
-                    color: TEAL,
-                    fontSize: 16,
-                  }}
-                >
-                  Total
-                </td>
-                <td
-                  style={{ padding: "12px 20px", textAlign: "center" }}
-                >
-                  <span
-                    style={{
-                      background: GOLD,
-                      color: WHITE,
-                      borderRadius: 8,
-                      padding: "4px 14px",
-                      fontWeight: 800,
-                      fontSize: 16,
-                    }}
-                  >
-                    10
-                  </span>
-                </td>
-                <td
+                  colSpan={4}
                   style={{
                     padding: "12px 20px",
                     fontWeight: 600,
@@ -819,7 +783,8 @@ function CNTableSlide() {
                     fontSize: 14,
                   }}
                 >
-                  Must always equal 10 ✓
+                  Each weight is an independent 1–10 rating of importance
+                  to your team (10 = most important)
                 </td>
               </tr>
             </tbody>
@@ -854,9 +819,10 @@ function CNTableSlide() {
                 lineHeight: 1.4,
               }}
             >
-              Rankings are customer evaluations. Weightings are{" "}
-              <em>your</em> engineering evaluations of how important each
-              need is.
+              <strong>Weightings</strong> (1–10) are <em>your</em> team's
+              engineering judgment of how <em>important</em> each need is.{" "}
+              <strong>Rankings</strong> (1–10) are used in the WBA to rate
+              how <em>well</em> a design <em>meets</em> each need.
             </div>
           </div>
           <div
@@ -949,13 +915,13 @@ function WhatIsWBASlide() {
           {
             icon: "📋",
             title: "Customer Needs Table",
-            desc: "What matters & how much (weights sum to 10)",
+            desc: "What matters & how much (each weight rated 1–10)",
             delay: 400,
           },
           {
             icon: "⚖️",
             title: "WBA Matrix",
-            desc: "Rate each design (1–10) on each need, multiply by weight",
+            desc: "Rank each design (1–10) on how well it fits each need, multiply by weight",
             delay: 600,
           },
           {
@@ -1071,7 +1037,7 @@ function WBAStepsSlide() {
           </span>,
           <span>
             <strong style={{ color: TEAL }}>Use your weights</strong> —
-            the ones you already assigned (adding up to 10). These go in
+            the 1–10 importance ratings you already assigned. These go in
             the first row under the headers.
           </span>,
           <span>
@@ -1081,9 +1047,10 @@ function WBAStepsSlide() {
             as rows. You need at least 2 designs to compare.
           </span>,
           <span>
-            <strong style={{ color: TEAL }}>Rate each design</strong> on
+            <strong style={{ color: TEAL }}>Rank each design</strong> on
             how well it meets each customer need on a scale of{" "}
             <strong>1–10</strong> (1 = poor fit, 10 = excellent fit).
+            These are your <strong>rankings</strong>.
           </span>,
           <span>
             <strong style={{ color: TEAL }}>Multiply & sum:</strong> For
@@ -1129,8 +1096,8 @@ function WBAStepsSlide() {
                 marginTop: 4,
               }}
             >
-              W = weight of that need | R = how well the design meets it
-              (1–10)
+              W = weight (1–10 importance) | R = ranking (1–10 how well
+              the design fits)
             </div>
           </div>
         </div>
@@ -1148,7 +1115,7 @@ function WBAExampleSlide() {
     "Ease of Use",
     "Performance",
   ];
-  const weights = [3, 2, 2, 2, 1];
+  const weights = [9, 7, 6, 8, 5];
   const designs = [
     { name: "Design A", scores: [8, 6, 7, 5, 9] },
     { name: "Design B", scores: [6, 9, 5, 8, 4] },
@@ -1273,7 +1240,7 @@ function WBAExampleSlide() {
                     color: GOLD,
                   }}
                 >
-                  Σ = 10
+                  (1–10)
                 </td>
               </tr>
             </thead>
@@ -1401,7 +1368,7 @@ function WBAExampleSlide() {
                 color: "#1e40af",
               }}
             >
-              Example Calc (Design C)
+              Example Calc (Design A)
             </div>
             <div
               style={{
@@ -1412,8 +1379,8 @@ function WBAExampleSlide() {
                 fontFamily: "monospace",
               }}
             >
-              (3×9) + (2×4) + (2×8) + (2×6) + (1×7) = 27+8+16+12+7 ={" "}
-              <strong>70</strong>
+              (9×8)+(7×6)+(6×7)+(8×5)+(5×9) = 72+42+42+40+45 ={" "}
+              <strong>241</strong>
             </div>
           </div>
         </div>
@@ -1423,7 +1390,7 @@ function WBAExampleSlide() {
 }
 
 function WBAInteractiveSlide() {
-  const [weights, setWeights] = useState([3, 2, 2, 2, 1]);
+  const [weights, setWeights] = useState([9, 7, 6, 8, 5]);
   const [scores, setScores] = useState([
     [8, 6, 7, 5, 9],
     [6, 9, 5, 8, 4],
@@ -1435,8 +1402,7 @@ function WBAInteractiveSlide() {
     "Ease of Use",
     "Performance",
   ];
-  const totalWeight = weights.reduce((a, b) => a + b, 0);
-  const isValid = totalWeight === 10;
+  const allWeightsValid = weights.every((w) => w >= 1 && w <= 10);
   const calcTotal = (row: number[]) =>
     row.reduce((sum: number, s: number, i: number) => sum + s * weights[i], 0);
   const totals = scores.map(calcTotal);
@@ -1497,7 +1463,7 @@ function WBAInteractiveSlide() {
         style={{
           borderRadius: 12,
           overflow: "hidden",
-          border: `2px solid ${isValid ? TEAL : "#ef4444"}`,
+          border: `2px solid ${allWeightsValid ? TEAL : "#ef4444"}`,
           marginBottom: 14,
           transition: "border-color 0.3s",
         }}
@@ -1571,7 +1537,7 @@ function WBAInteractiveSlide() {
                       height: 32,
                       textAlign: "center",
                       border: `2px solid ${
-                        isValid ? TEAL : "#ef4444"
+                        weights[i] >= 1 && weights[i] <= 10 ? TEAL : "#ef4444"
                       }`,
                       borderRadius: 8,
                       fontSize: 15,
@@ -1591,13 +1557,12 @@ function WBAInteractiveSlide() {
               >
                 <span
                   style={{
-                    fontWeight: 800,
-                    fontSize: 16,
-                    color: isValid ? TEAL : "#ef4444",
-                    transition: "color 0.3s",
+                    fontWeight: 700,
+                    fontSize: 13,
+                    color: TEAL,
                   }}
                 >
-                  {totalWeight}/10 {isValid ? "✓" : "✗"}
+                  1–10 each
                 </span>
               </td>
             </tr>
@@ -1605,7 +1570,7 @@ function WBAInteractiveSlide() {
           <tbody>
             {scores.map((row, di) => {
               const total = calcTotal(row);
-              const isWinner = isValid && total === maxT;
+              const isWinner = allWeightsValid && total === maxT;
               return (
                 <tr
                   key={di}
@@ -1668,7 +1633,7 @@ function WBAInteractiveSlide() {
                       color: isWinner ? TEAL : DARK,
                     }}
                   >
-                    {isValid ? total : "—"}
+                    {allWeightsValid ? total : "—"}
                   </td>
                 </tr>
               );
@@ -1676,7 +1641,7 @@ function WBAInteractiveSlide() {
           </tbody>
         </table>
       </div>
-      {!isValid && (
+      {!allWeightsValid && (
         <div
           style={{
             padding: "10px 16px",
@@ -1688,10 +1653,10 @@ function WBAInteractiveSlide() {
             marginBottom: 12,
           }}
         >
-          ⚠️ Weights add up to {totalWeight} — they need to equal 10!
+          ⚠️ Each weight must be between 1 and 10!
         </div>
       )}
-      {isValid && (
+      {allWeightsValid && (
         <div style={{ display: "flex", gap: 12 }}>
           {scores.map((row, di) => {
             const total = calcTotal(row);
@@ -1731,7 +1696,7 @@ function WBAInteractiveSlide() {
                 >
                   <div
                     style={{
-                      width: `${(total / 100) * 100}%`,
+                      width: `${Math.min(100, (total / maxT) * 100)}%`,
                       height: "100%",
                       background: isWinner
                         ? "#22c55e"
@@ -1798,15 +1763,15 @@ function KeyTakeawaysSlide() {
           },
           {
             emoji: "⚖️",
-            text: "Weights reflect YOUR team's engineering judgment on importance — they must add up to 10.",
+            text: "Weights (1–10) reflect YOUR team's engineering judgment on how important each need is — they don't need to add up to anything.",
           },
           {
             emoji: "📊",
-            text: "The WBA rates each design (1–10) on how well it meets each weighted need.",
+            text: "The WBA ranks each design (1–10) on how well it fits each weighted need.",
           },
           {
             emoji: "🧮",
-            text: "Multiply each rating by its weight, sum the row — highest score is typically your pick.",
+            text: "Multiply each ranking by its weight, sum the row — highest score is typically your pick.",
           },
           {
             emoji: "🤝",
@@ -1877,7 +1842,7 @@ const slideNames = [
   "Title",
   "What Are Customer Needs?",
   "Examples",
-  "The Weighting Rule",
+  "Weighting Needs",
   "Customer Needs Table",
   "What Is a WBA?",
   "WBA Steps",
