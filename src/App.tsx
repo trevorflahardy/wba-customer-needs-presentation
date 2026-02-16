@@ -1834,19 +1834,6 @@ function KeyTakeawaysSlide() {
           </FadeIn>
         ))}
       </div>
-      <FadeIn delay={1200}>
-        <div
-          style={{
-            marginTop: 24,
-            textAlign: "center",
-            fontSize: 14,
-            color: "#94a3b8",
-          }}
-        >
-          You'll include a WBA in your Robot Design Review Presentation —
-          start building yours now!
-        </div>
-      </FadeIn>
     </div>
   );
 }
