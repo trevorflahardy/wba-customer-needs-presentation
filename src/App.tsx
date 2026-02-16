@@ -1,4 +1,16 @@
-import { useState, useEffect, type ReactNode } from "react";
+import { useState, useEffect, useCallback, type ReactNode } from "react";
+
+function useIsMobile(breakpoint = 640) {
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < breakpoint);
+  useEffect(() => {
+    const mql = window.matchMedia(`(max-width: ${breakpoint - 1}px)`);
+    const handler = (e: MediaQueryListEvent | MediaQueryList) => setIsMobile(e.matches);
+    handler(mql);
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, [breakpoint]);
+  return isMobile;
+}
 
 const TEAL = "#006747";
 const TEAL_LIGHT = "#e6f2ee";
@@ -75,18 +87,19 @@ function StaggerList({ items, startDelay = 200 }: { items: ReactNode[]; startDel
 }
 
 function TitleSlide() {
+  const mobile = useIsMobile();
   return (
     <div
       style={{
         height: "100%",
-        minHeight: 500,
+        minHeight: mobile ? 360 : 500,
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
         background: `linear-gradient(135deg, ${DARK} 0%, ${TEAL} 100%)`,
         borderRadius: 16,
-        padding: 48,
+        padding: mobile ? 20 : 48,
         textAlign: "center",
         position: "relative",
         overflow: "hidden",
@@ -131,7 +144,7 @@ function TitleSlide() {
       <FadeIn delay={300}>
         <div
           style={{
-            fontSize: 40,
+            fontSize: mobile ? 26 : 40,
             fontWeight: 800,
             color: WHITE,
             lineHeight: 1.2,
@@ -145,7 +158,7 @@ function TitleSlide() {
       <FadeIn delay={500}>
         <div
           style={{
-            fontSize: 18,
+            fontSize: mobile ? 15 : 18,
             color: "rgba(255,255,255,0.7)",
             maxWidth: 500,
             lineHeight: 1.5,
@@ -191,8 +204,9 @@ function TitleSlide() {
 }
 
 function WhatAreCNSlide() {
+  const mobile = useIsMobile();
   return (
-    <div style={{ padding: "40px 48px" }}>
+    <div style={{ padding: mobile ? "24px 16px" : "40px 48px" }}>
       <FadeIn>
         <h2
           style={{
@@ -259,7 +273,7 @@ function WhatAreCNSlide() {
         </div>
       </FadeIn>
       <FadeIn delay={600}>
-        <div style={{ display: "flex", gap: 16 }}>
+        <div style={{ display: "flex", gap: 16, flexDirection: mobile ? "column" : "row" }}>
           {[
             {
               icon: "🎯",
@@ -311,6 +325,7 @@ function WhatAreCNSlide() {
 }
 
 function CNExamplesSlide() {
+  const mobile = useIsMobile();
   const examples = [
     {
       need: "Safety",
@@ -340,7 +355,7 @@ function CNExamplesSlide() {
     },
   ];
   return (
-    <div style={{ padding: "40px 48px" }}>
+    <div style={{ padding: mobile ? "24px 16px" : "40px 48px" }}>
       <FadeIn>
         <h2
           style={{
@@ -370,8 +385,8 @@ function CNExamplesSlide() {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 1fr 1fr",
-          gap: 14,
+          gridTemplateColumns: mobile ? "1fr 1fr" : "1fr 1fr 1fr",
+          gap: mobile ? 10 : 14,
         }}
       >
         {examples.map((ex, i) => (
@@ -425,6 +440,7 @@ function CNExamplesSlide() {
 }
 
 function WeightingRuleSlide() {
+  const mobile = useIsMobile();
   const [animStep, setAnimStep] = useState(0);
   useEffect(() => {
     const timers = [
@@ -446,11 +462,11 @@ function WeightingRuleSlide() {
   ];
 
   return (
-    <div style={{ padding: "40px 48px" }}>
+    <div style={{ padding: mobile ? "24px 16px" : "40px 48px" }}>
       <FadeIn>
         <h2
           style={{
-            fontSize: 30,
+            fontSize: mobile ? 24 : 30,
             fontWeight: 800,
             color: TEAL,
             marginBottom: 8,
@@ -492,8 +508,8 @@ function WeightingRuleSlide() {
           </div>
         </div>
       </FadeIn>
-      <div style={{ display: "flex", gap: 32, alignItems: "flex-start" }}>
-        <div style={{ flex: 1 }}>
+      <div style={{ display: "flex", gap: mobile ? 16 : 32, alignItems: "flex-start", flexDirection: mobile ? "column" : "row" }}>
+        <div style={{ flex: 1, width: "100%" }}>
           <FadeIn delay={400}>
             <div
               style={{
@@ -586,7 +602,7 @@ function WeightingRuleSlide() {
         <FadeIn delay={600}>
           <div
             style={{
-              width: 240,
+              width: mobile ? "100%" : 240,
               background: "#fef3c7",
               borderRadius: 12,
               padding: 20,
@@ -620,12 +636,13 @@ function WeightingRuleSlide() {
 }
 
 function CNTableSlide() {
+  const mobile = useIsMobile();
   return (
-    <div style={{ padding: "40px 48px" }}>
+    <div style={{ padding: mobile ? "24px 16px" : "40px 48px" }}>
       <FadeIn>
         <h2
           style={{
-            fontSize: 30,
+            fontSize: mobile ? 24 : 30,
             fontWeight: 800,
             color: TEAL,
             marginBottom: 8,
@@ -652,7 +669,8 @@ function CNTableSlide() {
         <div
           style={{
             borderRadius: 12,
-            overflow: "hidden",
+            overflow: "auto",
+            WebkitOverflowScrolling: "touch",
             border: "1px solid #e2e8f0",
             marginBottom: 24,
           }}
@@ -660,8 +678,9 @@ function CNTableSlide() {
           <table
             style={{
               width: "100%",
+              minWidth: mobile ? 520 : undefined,
               borderCollapse: "collapse",
-              fontSize: 15,
+              fontSize: mobile ? 13 : 15,
             }}
           >
             <thead>
@@ -792,7 +811,7 @@ function CNTableSlide() {
         </div>
       </FadeIn>
       <FadeIn delay={600}>
-        <div style={{ display: "flex", gap: 14 }}>
+        <div style={{ display: "flex", gap: 14, flexDirection: mobile ? "column" : "row" }}>
           <div
             style={{
               flex: 1,
@@ -862,12 +881,13 @@ function CNTableSlide() {
 }
 
 function WhatIsWBASlide() {
+  const mobile = useIsMobile();
   return (
-    <div style={{ padding: "40px 48px" }}>
+    <div style={{ padding: mobile ? "24px 16px" : "40px 48px" }}>
       <FadeIn>
         <h2
           style={{
-            fontSize: 30,
+            fontSize: mobile ? 24 : 30,
             fontWeight: 800,
             color: TEAL,
             marginBottom: 8,
@@ -909,7 +929,7 @@ function WhatIsWBASlide() {
         </div>
       </FadeIn>
       <div
-        style={{ display: "flex", gap: 20, alignItems: "flex-start" }}
+        style={{ display: "flex", gap: 20, alignItems: "flex-start", flexDirection: mobile ? "column" : "row" }}
       >
         {[
           {
@@ -1001,12 +1021,13 @@ function WhatIsWBASlide() {
 }
 
 function WBAStepsSlide() {
+  const mobile = useIsMobile();
   return (
-    <div style={{ padding: "40px 48px" }}>
+    <div style={{ padding: mobile ? "24px 16px" : "40px 48px" }}>
       <FadeIn>
         <h2
           style={{
-            fontSize: 30,
+            fontSize: mobile ? 24 : 30,
             fontWeight: 800,
             color: TEAL,
             marginBottom: 8,
@@ -1107,6 +1128,7 @@ function WBAStepsSlide() {
 }
 
 function WBAExampleSlide() {
+  const mobile = useIsMobile();
   const [highlight, setHighlight] = useState<number | null>(null);
   const needs = [
     "Safety",
@@ -1127,11 +1149,11 @@ function WBAExampleSlide() {
   const maxTotal = Math.max(...totals);
 
   return (
-    <div style={{ padding: "36px 44px" }}>
+    <div style={{ padding: mobile ? "24px 12px" : "36px 44px" }}>
       <FadeIn>
         <h2
           style={{
-            fontSize: 28,
+            fontSize: mobile ? 22 : 28,
             fontWeight: 800,
             color: TEAL,
             marginBottom: 8,
@@ -1154,7 +1176,8 @@ function WBAExampleSlide() {
         <div
           style={{
             borderRadius: 12,
-            overflow: "hidden",
+            overflow: "auto",
+            WebkitOverflowScrolling: "touch",
             border: "1px solid #e2e8f0",
             marginBottom: 20,
           }}
@@ -1162,8 +1185,9 @@ function WBAExampleSlide() {
           <table
             style={{
               width: "100%",
+              minWidth: mobile ? 560 : undefined,
               borderCollapse: "collapse",
-              fontSize: 14,
+              fontSize: mobile ? 12 : 14,
             }}
           >
             <thead>
@@ -1320,7 +1344,7 @@ function WBAExampleSlide() {
         </div>
       </FadeIn>
       <FadeIn delay={600}>
-        <div style={{ display: "flex", gap: 14 }}>
+        <div style={{ display: "flex", gap: 14, flexDirection: mobile ? "column" : "row" }}>
           <div
             style={{
               flex: 1,
@@ -1390,6 +1414,7 @@ function WBAExampleSlide() {
 }
 
 function WBAInteractiveSlide() {
+  const mobile = useIsMobile();
   const [weights, setWeights] = useState([9, 7, 6, 8, 5]);
   const [scores, setScores] = useState([
     [8, 6, 7, 5, 9],
@@ -1426,11 +1451,11 @@ function WBAInteractiveSlide() {
   };
 
   return (
-    <div style={{ padding: "32px 40px" }}>
+    <div style={{ padding: mobile ? "20px 12px" : "32px 40px" }}>
       <FadeIn>
         <h2
           style={{
-            fontSize: 26,
+            fontSize: mobile ? 22 : 26,
             fontWeight: 800,
             color: TEAL,
             marginBottom: 6,
@@ -1462,7 +1487,8 @@ function WBAInteractiveSlide() {
       <div
         style={{
           borderRadius: 12,
-          overflow: "hidden",
+          overflow: "auto",
+          WebkitOverflowScrolling: "touch",
           border: `2px solid ${allWeightsValid ? TEAL : "#ef4444"}`,
           marginBottom: 14,
           transition: "border-color 0.3s",
@@ -1471,8 +1497,9 @@ function WBAInteractiveSlide() {
         <table
           style={{
             width: "100%",
+            minWidth: mobile ? 520 : undefined,
             borderCollapse: "collapse",
-            fontSize: 14,
+            fontSize: mobile ? 12 : 14,
           }}
         >
           <thead>
@@ -1657,7 +1684,7 @@ function WBAInteractiveSlide() {
         </div>
       )}
       {allWeightsValid && (
-        <div style={{ display: "flex", gap: 12 }}>
+        <div style={{ display: "flex", gap: 12, flexDirection: mobile ? "column" : "row" }}>
           {scores.map((row, di) => {
             const total = calcTotal(row);
             const isWinner = total === maxT;
@@ -1725,12 +1752,13 @@ function WBAInteractiveSlide() {
 }
 
 function KeyTakeawaysSlide() {
+  const mobile = useIsMobile();
   return (
-    <div style={{ padding: "40px 48px" }}>
+    <div style={{ padding: mobile ? "24px 16px" : "40px 48px" }}>
       <FadeIn>
         <h2
           style={{
-            fontSize: 30,
+            fontSize: mobile ? 24 : 30,
             fontWeight: 800,
             color: TEAL,
             marginBottom: 8,
@@ -1852,15 +1880,16 @@ const slideNames = [
 ];
 
 export default function App() {
+  const mobile = useIsMobile();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [animKey, setAnimKey] = useState(0);
 
-  const goTo = (idx: number) => {
+  const goTo = useCallback((idx: number) => {
     if (idx >= 0 && idx < slides.length) {
       setCurrentSlide(idx);
       setAnimKey((k) => k + 1);
     }
-  };
+  }, []);
 
   const SlideComponent =
     slideComponents[slides[currentSlide].type as SlideType];
@@ -1879,7 +1908,31 @@ export default function App() {
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [currentSlide]);
+  }, [currentSlide, goTo]);
+
+  // Swipe support for mobile
+  useEffect(() => {
+    let startX = 0;
+    let startY = 0;
+    const onTouchStart = (e: TouchEvent) => {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+    };
+    const onTouchEnd = (e: TouchEvent) => {
+      const dx = e.changedTouches[0].clientX - startX;
+      const dy = e.changedTouches[0].clientY - startY;
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+        if (dx < 0) goTo(currentSlide + 1);
+        else goTo(currentSlide - 1);
+      }
+    };
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchend", onTouchEnd, { passive: true });
+    return () => {
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchend", onTouchEnd);
+    };
+  }, [currentSlide, goTo]);
 
   return (
     <div
@@ -1899,10 +1952,11 @@ export default function App() {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          padding: "10px 24px",
+          padding: mobile ? "8px 12px" : "10px 24px",
           background: WHITE,
           borderBottom: "1px solid #e2e8f0",
           flexShrink: 0,
+          gap: 8,
         }}
       >
         <div
@@ -1911,19 +1965,20 @@ export default function App() {
             fontWeight: 700,
             color: TEAL,
             letterSpacing: 1,
+            flexShrink: 0,
           }}
         >
           EGN3000L
         </div>
-        <div style={{ display: "flex", gap: 4 }}>
+        <div style={{ display: "flex", gap: mobile ? 3 : 4, flexWrap: "wrap", justifyContent: "center", flex: 1 }}>
           {slides.map((_, i) => (
             <button
               key={i}
               onClick={() => goTo(i)}
               title={slideNames[i]}
               style={{
-                width: i === currentSlide ? 28 : 10,
-                height: 10,
+                width: i === currentSlide ? (mobile ? 20 : 28) : (mobile ? 8 : 10),
+                height: mobile ? 8 : 10,
                 borderRadius: 5,
                 background:
                   i === currentSlide
@@ -1938,7 +1993,7 @@ export default function App() {
             />
           ))}
         </div>
-        <div style={{ fontSize: 13, color: "#94a3b8" }}>
+        <div style={{ fontSize: 13, color: "#94a3b8", flexShrink: 0 }}>
           {currentSlide + 1} / {slides.length}
         </div>
       </div>
@@ -1948,9 +2003,10 @@ export default function App() {
         style={{
           flex: 1,
           display: "flex",
-          alignItems: "center",
+          alignItems: mobile ? "flex-start" : "center",
           justifyContent: "center",
-          padding: 24,
+          padding: mobile ? 8 : 24,
+          overflow: "auto",
         }}
       >
         <div
@@ -1958,9 +2014,9 @@ export default function App() {
           style={{
             width: "100%",
             maxWidth: 960,
-            minHeight: 540,
+            minHeight: mobile ? undefined : 540,
             background: WHITE,
-            borderRadius: 16,
+            borderRadius: mobile ? 12 : 16,
             boxShadow: "0 8px 40px rgba(0,0,0,0.08)",
             overflow: "hidden",
             position: "relative",
@@ -1976,7 +2032,7 @@ export default function App() {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          padding: "12px 24px",
+          padding: mobile ? "10px 12px" : "12px 24px",
           background: WHITE,
           borderTop: "1px solid #e2e8f0",
           flexShrink: 0,
@@ -1986,31 +2042,34 @@ export default function App() {
           onClick={() => goTo(currentSlide - 1)}
           disabled={currentSlide === 0}
           style={{
-            padding: "8px 20px",
+            padding: mobile ? "8px 12px" : "8px 20px",
             borderRadius: 8,
             border: `1px solid ${TEAL}`,
             background: "transparent",
             color: TEAL,
             fontWeight: 600,
-            fontSize: 14,
+            fontSize: mobile ? 13 : 14,
             cursor:
               currentSlide === 0 ? "not-allowed" : "pointer",
             opacity: currentSlide === 0 ? 0.4 : 1,
             transition: "opacity 0.2s",
+            flexShrink: 0,
           }}
         >
-          ← Previous
+          {mobile ? "←" : "← Previous"}
         </button>
-        <div
-          style={{ fontSize: 14, fontWeight: 600, color: DARK }}
-        >
-          {slideNames[currentSlide]}
-        </div>
+        {!mobile && (
+          <div
+            style={{ fontSize: 14, fontWeight: 600, color: DARK }}
+          >
+            {slideNames[currentSlide]}
+          </div>
+        )}
         <button
           onClick={() => goTo(currentSlide + 1)}
           disabled={currentSlide === slides.length - 1}
           style={{
-            padding: "8px 20px",
+            padding: mobile ? "8px 12px" : "8px 20px",
             borderRadius: 8,
             border: "none",
             background:
@@ -2019,15 +2078,16 @@ export default function App() {
                 : TEAL,
             color: WHITE,
             fontWeight: 600,
-            fontSize: 14,
+            fontSize: mobile ? 13 : 14,
             cursor:
               currentSlide === slides.length - 1
                 ? "not-allowed"
                 : "pointer",
             transition: "background 0.2s",
+            flexShrink: 0,
           }}
         >
-          Next →
+          {mobile ? "→" : "Next →"}
         </button>
       </div>
     </div>

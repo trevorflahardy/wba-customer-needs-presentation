@@ -15,3 +15,33 @@ body,
   padding: 0;
   overflow-x: hidden;
 }
+
+/* Mobile touch improvements */
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Smooth scrolling for table containers on mobile */
+@media (max-width: 639px) {
+  table {
+    font-size: 13px;
+  }
+
+  /* Prevent horizontal body overflow from tables */
+  body {
+    overflow-x: hidden;
+  }
+
+  /* Make inputs easier to tap on mobile */
+  input[type="number"] {
+    min-height: 36px;
+    font-size: 16px !important; /* Prevent iOS zoom on focus */
+  }
+}
