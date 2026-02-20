@@ -82,78 +82,149 @@ export default function App() {
     };
   }, [currentSlide, goTo]);
 
+  const progressPercent = ((currentSlide + 1) / slides.length) * 100;
+
   return (
     <div
       style={{
         width: "100%",
         minHeight: "100vh",
-        background: "#f1f5f9",
+        background: "#f8fafb",
         display: "flex",
         flexDirection: "column",
         fontFamily:
-          "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+          "'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif",
       }}
     >
-      {/* Top nav */}
+      {/* Top nav — Duolingo-style progress header */}
       <div
         style={{
           display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: mobile ? "8px 12px" : "10px 24px",
+          flexDirection: "column",
           background: WHITE,
           borderBottom: "1px solid #e2e8f0",
           flexShrink: 0,
-          gap: 8,
         }}
       >
         <div
           style={{
-            fontSize: 13,
-            fontWeight: 700,
-            color: TEAL,
-            letterSpacing: 1,
-            flexShrink: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: mobile ? "10px 16px" : "12px 32px",
+            gap: 12,
           }}
         >
-          EGN3000L
+          <div
+            style={{
+              fontSize: 14,
+              fontWeight: 800,
+              color: TEAL,
+              letterSpacing: 0.5,
+              flexShrink: 0,
+              display: "flex",
+              alignItems: "center",
+              gap: 8,
+            }}
+          >
+            <span style={{ fontSize: 18 }}>📐</span>
+            EGN3000L
+          </div>
+
+          {/* Progress bar — Duolingo style */}
+          <div
+            style={{
+              flex: 1,
+              maxWidth: 500,
+              height: 16,
+              background: "#e8ecef",
+              borderRadius: 12,
+              overflow: "hidden",
+              position: "relative",
+            }}
+          >
+            <div
+              style={{
+                width: `${progressPercent}%`,
+                height: "100%",
+                background: `linear-gradient(90deg, ${TEAL}, #00a86b)`,
+                borderRadius: 12,
+                transition: "width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)",
+                position: "relative",
+              }}
+            >
+              <div
+                style={{
+                  position: "absolute",
+                  top: 2,
+                  left: 4,
+                  right: 4,
+                  height: 5,
+                  borderRadius: 4,
+                  background: "rgba(255,255,255,0.3)",
+                }}
+              />
+            </div>
+          </div>
+
+          <div
+            style={{
+              fontSize: 14,
+              fontWeight: 700,
+              color: DARK,
+              flexShrink: 0,
+              background: "#f0f4f8",
+              borderRadius: 20,
+              padding: "4px 12px",
+            }}
+          >
+            {currentSlide + 1}/{slides.length}
+          </div>
         </div>
-        <div style={{ display: "flex", gap: mobile ? 3 : 4, flexWrap: "wrap", justifyContent: "center", flex: 1 }}>
+
+        {/* Slide dots below progress */}
+        <div
+          style={{
+            display: "flex",
+            gap: mobile ? 3 : 5,
+            justifyContent: "center",
+            padding: mobile ? "0 12px 8px" : "0 32px 10px",
+          }}
+        >
           {slides.map((_, i) => (
             <button
               key={i}
               onClick={() => goTo(i)}
               title={slideNames[i]}
+              aria-label={`Go to ${slideNames[i]}`}
               style={{
-                width: i === currentSlide ? (mobile ? 20 : 28) : (mobile ? 8 : 10),
-                height: mobile ? 8 : 10,
-                borderRadius: 5,
+                width: i === currentSlide ? (mobile ? 24 : 32) : (mobile ? 10 : 12),
+                height: mobile ? 6 : 8,
+                borderRadius: 4,
                 background:
                   i === currentSlide
                     ? TEAL
                     : i < currentSlide
-                    ? GOLD
-                    : "#cbd5e1",
+                      ? GOLD
+                      : "#dde3ea",
                 border: "none",
                 cursor: "pointer",
-                transition: "all 0.3s ease",
+                transition: "all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)",
+                transform: i === currentSlide ? "scaleY(1.3)" : "scaleY(1)",
               }}
             />
           ))}
         </div>
-        <div style={{ fontSize: 13, color: "#94a3b8", flexShrink: 0 }}>
-          {currentSlide + 1} / {slides.length}
-        </div>
       </div>
 
-      {/* Slide area */}
+      {/* Slide area — expanded website sizing */}
       <div
         style={{
           flex: 1,
           display: "flex",
-          alignItems: mobile ? "flex-start" : "center",
+          alignItems: "flex-start",
           justifyContent: "center",
-          padding: mobile ? 8 : 24,
+          padding: mobile ? "12px 8px" : "32px 24px",
           overflow: "auto",
         }}
       >
@@ -161,26 +232,26 @@ export default function App() {
           key={animKey}
           style={{
             width: "100%",
-            maxWidth: 960,
-            minHeight: mobile ? undefined : 540,
+            maxWidth: 1080,
             background: WHITE,
-            borderRadius: mobile ? 12 : 16,
-            boxShadow: "0 8px 40px rgba(0,0,0,0.08)",
+            borderRadius: mobile ? 16 : 24,
+            boxShadow: "0 4px 24px rgba(0,0,0,0.04), 0 12px 48px rgba(0,0,0,0.06)",
             overflow: "hidden",
             position: "relative",
+            animation: "slideIn 0.3s ease-out",
           }}
         >
           <SlideComponent />
         </div>
       </div>
 
-      {/* Bottom nav */}
+      {/* Bottom nav — Duolingo style buttons */}
       <div
         style={{
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          padding: mobile ? "10px 12px" : "12px 24px",
+          padding: mobile ? "12px 16px" : "14px 32px",
           background: WHITE,
           borderTop: "1px solid #e2e8f0",
           flexShrink: 0,
@@ -190,25 +261,28 @@ export default function App() {
           onClick={() => goTo(currentSlide - 1)}
           disabled={currentSlide === 0}
           style={{
-            padding: mobile ? "8px 12px" : "8px 20px",
-            borderRadius: 8,
-            border: `1px solid ${TEAL}`,
+            padding: mobile ? "10px 16px" : "10px 24px",
+            borderRadius: 12,
+            border: `2px solid ${currentSlide === 0 ? "#dde3ea" : TEAL}`,
             background: "transparent",
-            color: TEAL,
-            fontWeight: 600,
-            fontSize: mobile ? 13 : 14,
-            cursor:
-              currentSlide === 0 ? "not-allowed" : "pointer",
-            opacity: currentSlide === 0 ? 0.4 : 1,
-            transition: "opacity 0.2s",
+            color: currentSlide === 0 ? "#94a3b8" : TEAL,
+            fontWeight: 700,
+            fontSize: mobile ? 14 : 15,
+            cursor: currentSlide === 0 ? "not-allowed" : "pointer",
+            transition: "all 0.2s ease",
             flexShrink: 0,
           }}
         >
-          {mobile ? "\u2190" : "\u2190 Previous"}
+          {mobile ? "←" : "← Back"}
         </button>
         {!mobile && (
           <div
-            style={{ fontSize: 14, fontWeight: 600, color: DARK }}
+            style={{
+              fontSize: 15,
+              fontWeight: 700,
+              color: DARK,
+              textAlign: "center",
+            }}
           >
             {slideNames[currentSlide]}
           </div>
@@ -217,25 +291,31 @@ export default function App() {
           onClick={() => goTo(currentSlide + 1)}
           disabled={currentSlide === slides.length - 1}
           style={{
-            padding: mobile ? "8px 12px" : "8px 20px",
-            borderRadius: 8,
+            padding: mobile ? "10px 16px" : "10px 24px",
+            borderRadius: 12,
             border: "none",
             background:
               currentSlide === slides.length - 1
-                ? "#cbd5e1"
-                : TEAL,
-            color: WHITE,
-            fontWeight: 600,
-            fontSize: mobile ? 13 : 14,
+                ? "#dde3ea"
+                : `linear-gradient(135deg, ${TEAL}, #00a86b)`,
+            color: currentSlide === slides.length - 1 ? "#94a3b8" : WHITE,
+            fontWeight: 700,
+            fontSize: mobile ? 14 : 15,
             cursor:
               currentSlide === slides.length - 1
                 ? "not-allowed"
                 : "pointer",
-            transition: "background 0.2s",
+            transition: "all 0.2s ease",
             flexShrink: 0,
+            boxShadow:
+              currentSlide === slides.length - 1
+                ? "none"
+                : `0 4px 12px ${TEAL}33`,
           }}
         >
-          {mobile ? "\u2192" : "Next \u2192"}
+          {currentSlide === slides.length - 1
+            ? (mobile ? "✓" : "Complete ✓")
+            : (mobile ? "→" : "Continue →")}
         </button>
       </div>
     </div>

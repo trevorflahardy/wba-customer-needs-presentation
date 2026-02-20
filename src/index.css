@@ -19,16 +19,24 @@ body,
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    sans-serif;
+  background: #f8fafb;
 }
 
-/* Focus styles for accessibility */
+/* Focus styles for accessibility — Duolingo style */
 button:focus-visible,
 input:focus-visible {
-  outline: 2px solid #006747;
+  outline: 3px solid #006747;
   outline-offset: 2px;
+  border-radius: 8px;
 }
 
-/* Mobile touch improvements */
+/* Number input cleanup */
 input[type="number"] {
   -moz-appearance: textfield;
   appearance: textfield;
@@ -40,13 +48,18 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
 }
 
-/* Button hover transitions */
+/* Duolingo-style button transitions */
 button {
   transition:
-    transform 0.15s ease,
-    box-shadow 0.15s ease,
+    transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.2s ease,
     background 0.2s ease,
-    opacity 0.2s ease;
+    opacity 0.2s ease,
+    border-color 0.2s ease;
+}
+
+button:active:not(:disabled) {
+  transform: scale(0.96) !important;
 }
 
 /* Smooth table hover */
@@ -54,11 +67,16 @@ tr {
   transition: background 0.15s ease;
 }
 
-/* Card hover lift effect */
-[data-card] {
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+/* Slide entrance animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Shake animation for wrong answers */
@@ -67,17 +85,23 @@ tr {
   100% {
     transform: translateX(0);
   }
-  20% {
+  15% {
+    transform: translateX(-8px);
+  }
+  30% {
+    transform: translateX(8px);
+  }
+  45% {
     transform: translateX(-6px);
   }
-  40% {
+  60% {
     transform: translateX(6px);
   }
-  60% {
-    transform: translateX(-4px);
+  75% {
+    transform: translateX(-3px);
   }
-  80% {
-    transform: translateX(4px);
+  90% {
+    transform: translateX(3px);
   }
 }
 
@@ -92,20 +116,108 @@ tr {
   }
 }
 
+/* Bounce-in animation */
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.08);
+  }
+  70% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Success pop */
+@keyframes popIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Celebration confetti shimmer */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Float up for emoji celebrations */
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-60px) scale(1.3);
+    opacity: 0;
+  }
+}
+
+/* Gentle glow pulse for placeholders */
+@keyframes glowPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 103, 71, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(0, 103, 71, 0.08);
+  }
+}
+
+/* Duolingo-style progress fill */
+@keyframes progressFill {
+  from {
+    width: 0%;
+  }
+}
+
+/* Typing cursor blink for placeholder text */
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
 /* Smooth scrolling for table containers on mobile */
 @media (max-width: 639px) {
   table {
     font-size: 13px;
   }
 
-  /* Prevent horizontal body overflow from tables */
   body {
     overflow-x: hidden;
   }
 
-  /* Make inputs easier to tap on mobile */
   input[type="number"] {
-    min-height: 36px;
+    min-height: 44px;
     font-size: 16px !important; /* Prevent iOS zoom on focus */
   }
+}
+
+/* Selection color */
+::selection {
+  background: rgba(0, 103, 71, 0.15);
+  color: inherit;
 }

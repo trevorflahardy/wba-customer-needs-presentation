@@ -5,7 +5,7 @@ import { TEAL, TEAL_LIGHT, GOLD, DARK, WHITE } from "../../constants/theme";
 export function WhatIsWBASlide() {
   const mobile = useIsMobile();
   return (
-    <div style={{ padding: mobile ? "24px 16px" : "40px 48px" }}>
+    <div style={{ padding: mobile ? "24px 16px" : "40px 56px" }}>
       <FadeIn>
         <h2
           style={{
@@ -32,21 +32,35 @@ export function WhatIsWBASlide() {
         <div
           style={{
             background: `linear-gradient(135deg, ${DARK}, #1e3a5a)`,
-            borderRadius: 14,
-            padding: 28,
+            borderRadius: 18,
+            padding: mobile ? 24 : 32,
             color: WHITE,
             marginBottom: 28,
+            position: "relative",
+            overflow: "hidden",
           }}
         >
-          <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 8 }}>
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              height: 3,
+              background: `linear-gradient(90deg, transparent, ${TEAL}88, transparent)`,
+              backgroundSize: "200% 100%",
+              animation: "shimmer 3s infinite linear",
+            }}
+          />
+          <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 10, lineHeight: 1.5 }}>
             A WBA (also called a Pugh Chart) is a decision matrix that
             compares your candidate designs against your customer needs.
           </div>
           <div
-            style={{ fontSize: 15, opacity: 0.85, lineHeight: 1.6 }}
+            style={{ fontSize: 15, opacity: 0.85, lineHeight: 1.7 }}
           >
             It takes the customer needs you've already weighted and asks:{" "}
-            <em>"How well does each design meet each need?"</em>
+            <em>"How well does each design meet each need?"</em> 🤔
           </div>
         </div>
       </FadeIn>
@@ -77,15 +91,23 @@ export function WhatIsWBASlide() {
             <div style={{ flex: 1, textAlign: "center" }}>
               <div
                 style={{
-                  width: 72,
-                  height: 72,
+                  width: 76,
+                  height: 76,
                   borderRadius: "50%",
                   background: TEAL_LIGHT,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   margin: "0 auto 12px",
-                  fontSize: 32,
+                  fontSize: 34,
+                  boxShadow: "0 4px 16px rgba(0,103,71,0.1)",
+                  transition: "transform 0.2s cubic-bezier(0.34,1.56,0.64,1)",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLDivElement).style.transform = "scale(1.1)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLDivElement).style.transform = "scale(1)";
                 }}
               >
                 {item.icon}
@@ -100,6 +122,7 @@ export function WhatIsWBASlide() {
                   fontSize: 13,
                   color: "#64748b",
                   marginTop: 4,
+                  lineHeight: 1.5,
                 }}
               >
                 {item.desc}
@@ -123,13 +146,13 @@ export function WhatIsWBASlide() {
         <div
           style={{
             marginTop: 24,
-            padding: "14px 20px",
+            padding: "16px 22px",
             background: "#fef3c7",
-            borderRadius: 10,
+            borderRadius: 14,
             border: `1px solid ${GOLD}33`,
             fontSize: 14,
             color: "#7c6a1a",
-            lineHeight: 1.5,
+            lineHeight: 1.6,
           }}
         >
           ⚠️ <strong>Important:</strong> The WBA is a decision-making{" "}

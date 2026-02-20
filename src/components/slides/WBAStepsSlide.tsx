@@ -6,7 +6,7 @@ import { TEAL, TEAL_LIGHT, GOLD, DARK, WHITE } from "../../constants/theme";
 export function WBAStepsSlide() {
   const mobile = useIsMobile();
   return (
-    <div style={{ padding: mobile ? "24px 16px" : "40px 48px" }}>
+    <div style={{ padding: mobile ? "24px 16px" : "40px 56px" }}>
       <FadeIn>
         <h2
           style={{
@@ -25,7 +25,7 @@ export function WBAStepsSlide() {
             height: 4,
             background: GOLD,
             borderRadius: 2,
-            marginBottom: 28,
+            marginBottom: 24,
           }}
         />
       </FadeIn>
@@ -70,8 +70,8 @@ export function WBAStepsSlide() {
           style={{
             marginTop: 20,
             background: `linear-gradient(135deg, ${TEAL}, ${DARK})`,
-            borderRadius: 14,
-            padding: 24,
+            borderRadius: 18,
+            padding: mobile ? 20 : 28,
             display: "flex",
             alignItems: "center",
             gap: 16,
@@ -146,10 +146,10 @@ export function WBAStepsSlide() {
         <div
           style={{
             marginTop: 14,
-            padding: "14px 20px",
+            padding: "16px 22px",
             background: TEAL_LIGHT,
-            borderRadius: 10,
-            fontSize: 13,
+            borderRadius: 14,
+            fontSize: 14,
             color: TEAL,
             lineHeight: 1.6,
           }}

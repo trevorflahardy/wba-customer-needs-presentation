@@ -8,11 +8,11 @@ export function WeightingRuleSlide() {
   const [animStep, setAnimStep] = useState(0);
   useEffect(() => {
     const timers = [
-      setTimeout(() => setAnimStep(1), 400),
-      setTimeout(() => setAnimStep(2), 800),
-      setTimeout(() => setAnimStep(3), 1200),
-      setTimeout(() => setAnimStep(4), 1600),
-      setTimeout(() => setAnimStep(5), 2000),
+      setTimeout(() => setAnimStep(1), 600),
+      setTimeout(() => setAnimStep(2), 1000),
+      setTimeout(() => setAnimStep(3), 1400),
+      setTimeout(() => setAnimStep(4), 1800),
+      setTimeout(() => setAnimStep(5), 2200),
     ];
     return () => timers.forEach(clearTimeout);
   }, []);
@@ -26,11 +26,11 @@ export function WeightingRuleSlide() {
   ];
 
   return (
-    <div style={{ padding: mobile ? "24px 16px" : "40px 48px" }}>
+    <div style={{ padding: mobile ? "28px 16px" : "48px 56px" }}>
       <FadeIn>
         <h2
           style={{
-            fontSize: mobile ? 24 : 30,
+            fontSize: mobile ? 24 : 32,
             fontWeight: 800,
             color: TEAL,
             marginBottom: 8,
@@ -49,148 +49,201 @@ export function WeightingRuleSlide() {
           }}
         />
       </FadeIn>
+
+      {/* Key rule card */}
       <FadeIn delay={200}>
         <div
           style={{
             background: `linear-gradient(135deg, ${TEAL}, ${DARK})`,
-            borderRadius: 14,
-            padding: 28,
+            borderRadius: 18,
+            padding: mobile ? 24 : 32,
             color: WHITE,
             marginBottom: 28,
           }}
         >
-          <div style={{ fontSize: 20, fontWeight: 700, marginBottom: 8 }}>
-            Key Rule: Rate Each Need 1–10 for Importance
+          <div style={{ fontSize: mobile ? 18 : 22, fontWeight: 800, marginBottom: 10 }}>
+            ⚖️ Key Rule: Rate Each Need 1–10 for Importance
           </div>
-          <div style={{ fontSize: 15, opacity: 0.9, lineHeight: 1.6 }}>
+          <div style={{ fontSize: 16, opacity: 0.9, lineHeight: 1.7 }}>
             Each customer need gets a weight from <strong>1 to 10</strong>{" "}
             based on how important it is to your team.{" "}
             <strong>10 = extremely important</strong>,{" "}
-            <strong>1 = low but still important</strong>. Weights are
+            <strong>1 = low but still relevant</strong>. Weights are
             independent — they do <strong>not</strong> need to add up to any
             particular number.
           </div>
         </div>
       </FadeIn>
-      <div style={{ display: "flex", gap: mobile ? 16 : 32, alignItems: "flex-start", flexDirection: mobile ? "column" : "row" }}>
+
+      <div style={{ display: "flex", gap: mobile ? 16 : 28, alignItems: "flex-start", flexDirection: mobile ? "column" : "row" }}>
         <div style={{ flex: 1, width: "100%" }}>
           <FadeIn delay={400}>
+            {/* Example badge — makes it crystal clear */}
             <div
               style={{
-                fontSize: 15,
-                fontWeight: 700,
-                color: DARK,
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
                 marginBottom: 16,
               }}
             >
-              Example: Weighting Customer Needs
-            </div>
-          </FadeIn>
-          {weights.map((w, i) => (
-            <FadeIn key={i} delay={500 + i * 120}>
               <div
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 12,
-                  marginBottom: 10,
+                  padding: "4px 12px",
+                  background: "#fef3c7",
+                  border: "2px dashed #fbbf24",
+                  borderRadius: 20,
+                  fontSize: 11,
+                  fontWeight: 800,
+                  color: "#92400e",
+                  textTransform: "uppercase",
+                  letterSpacing: 2,
                 }}
               >
+                Example Only
+              </div>
+              <div style={{ fontSize: 14, color: "#64748b" }}>
+                These weights are made up — yours will be different!
+              </div>
+            </div>
+          </FadeIn>
+
+          {/* Animated bar chart with dashed border container */}
+          <div
+            style={{
+              border: "2px dashed #e2e8f0",
+              borderRadius: 16,
+              padding: mobile ? 16 : 20,
+              background: "#fafbfc",
+            }}
+          >
+            {weights.map((w, i) => (
+              <FadeIn key={i} delay={500 + i * 120}>
                 <div
                   style={{
-                    width: 110,
-                    fontSize: 14,
-                    fontWeight: 600,
-                    color: DARK,
-                  }}
-                >
-                  {w.need}
-                </div>
-                <div
-                  style={{
-                    flex: 1,
-                    height: 28,
-                    background: "#f1f5f9",
-                    borderRadius: 14,
-                    overflow: "hidden",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 12,
+                    marginBottom: 12,
                   }}
                 >
                   <div
                     style={{
-                      width:
-                        animStep >= i + 1 ? `${(w.w / 10) * 100}%` : "0%",
-                      height: "100%",
-                      background: w.color,
-                      borderRadius: 14,
-                      transition:
-                        "width 0.7s cubic-bezier(0.25,0.46,0.45,0.94)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
+                      width: 60,
+                      fontSize: 15,
+                      fontWeight: 700,
+                      color: DARK,
+                      fontFamily: "'SF Mono', monospace",
                     }}
                   >
-                    {animStep >= i + 1 && (
-                      <span
-                        style={{
-                          color: WHITE,
-                          fontSize: 13,
-                          fontWeight: 700,
-                        }}
-                      >
-                        {w.w}
-                      </span>
-                    )}
+                    {w.need}
+                  </div>
+                  <div
+                    style={{
+                      flex: 1,
+                      height: 32,
+                      background: "#f1f5f9",
+                      borderRadius: 16,
+                      overflow: "hidden",
+                    }}
+                  >
+                    <div
+                      style={{
+                        width:
+                          animStep >= i + 1 ? `${(w.w / 10) * 100}%` : "0%",
+                        height: "100%",
+                        background: `linear-gradient(90deg, ${w.color}, ${w.color}cc)`,
+                        borderRadius: 16,
+                        transition:
+                          "width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        position: "relative",
+                      }}
+                    >
+                      {animStep >= i + 1 && (
+                        <span
+                          style={{
+                            color: WHITE,
+                            fontSize: 14,
+                            fontWeight: 800,
+                          }}
+                        >
+                          {w.w}
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </FadeIn>
-          ))}
-          <FadeIn delay={1200}>
+              </FadeIn>
+            ))}
+          </div>
+
+          <FadeIn delay={1300}>
             <div
               style={{
-                marginTop: 12,
-                padding: "10px 16px",
+                marginTop: 14,
+                padding: "12px 16px",
                 background: TEAL_LIGHT,
-                borderRadius: 10,
-                fontSize: 13,
+                borderRadius: 12,
+                fontSize: 14,
                 color: TEAL,
                 lineHeight: 1.5,
+                display: "flex",
+                alignItems: "center",
+                gap: 8,
               }}
             >
+              <span style={{ fontSize: 16, flexShrink: 0 }}>✅</span>
               Each weight is an <strong>independent</strong> 1–10 rating.
-              Higher weight = more important to your team's design
-              decisions.
+              Higher weight = more important to your team.
             </div>
           </FadeIn>
         </div>
+
+        {/* Why 1-10 card */}
         <FadeIn delay={600}>
           <div
             style={{
-              width: mobile ? "100%" : 240,
+              width: mobile ? "100%" : 260,
               background: "#fef3c7",
-              borderRadius: 12,
-              padding: 20,
+              borderRadius: 16,
+              padding: 24,
               border: "1px solid #fbbf2433",
             }}
           >
-            <div style={{ fontSize: 20, marginBottom: 8 }}>🤔</div>
+            <div style={{ fontSize: 24, marginBottom: 10 }}>🤔</div>
             <div
               style={{
-                fontSize: 14,
+                fontSize: 15,
                 fontWeight: 700,
                 color: "#92400e",
-                marginBottom: 6,
+                marginBottom: 8,
               }}
             >
               Why 1–10?
             </div>
             <div
-              style={{ fontSize: 13, color: "#78350f", lineHeight: 1.5 }}
+              style={{ fontSize: 14, color: "#78350f", lineHeight: 1.6 }}
             >
               The 1–10 scale lets your team express how important each need
-              is independently. A 10 means "absolutely critical" and a 1
-              means "nice to have but not a dealbreaker." This reflects your
-              engineering judgment.
+              is independently. A <strong>10</strong> means "absolutely critical" and a{" "}
+              <strong>1</strong> means "nice to have but not a dealbreaker."
+            </div>
+            <div
+              style={{
+                marginTop: 14,
+                padding: "10px 14px",
+                background: "rgba(255,255,255,0.6)",
+                borderRadius: 10,
+                fontSize: 13,
+                color: "#78350f",
+                lineHeight: 1.5,
+              }}
+            >
+              💡 <strong>Remember:</strong> This reflects your team's
+              engineering judgment — not a formula!
             </div>
           </div>
         </FadeIn>

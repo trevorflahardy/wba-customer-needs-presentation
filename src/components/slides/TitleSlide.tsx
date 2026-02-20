@@ -8,63 +8,78 @@ export function TitleSlide() {
     <div
       style={{
         height: "100%",
-        minHeight: mobile ? 360 : 500,
+        minHeight: mobile ? 360 : 480,
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
         background: `linear-gradient(135deg, ${DARK} 0%, ${TEAL} 100%)`,
-        borderRadius: 16,
-        padding: mobile ? 20 : 48,
+        borderRadius: 20,
+        padding: mobile ? 24 : 56,
         textAlign: "center",
         position: "relative",
         overflow: "hidden",
       }}
     >
+      {/* Decorative circles */}
       <div
         style={{
           position: "absolute",
-          top: -60,
-          right: -60,
-          width: 200,
-          height: 200,
+          top: -80,
+          right: -80,
+          width: 240,
+          height: 240,
           borderRadius: "50%",
-          border: "2px solid rgba(255,255,255,0.1)",
+          border: "2px solid rgba(255,255,255,0.08)",
         }}
       />
       <div
         style={{
           position: "absolute",
-          bottom: -40,
-          left: -40,
-          width: 160,
-          height: 160,
+          bottom: -50,
+          left: -50,
+          width: 180,
+          height: 180,
           borderRadius: "50%",
-          border: "2px solid rgba(255,255,255,0.08)",
+          border: "2px solid rgba(255,255,255,0.06)",
+        }}
+      />
+      {/* Shimmer top edge */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: 3,
+          background: `linear-gradient(90deg, transparent, ${GOLD}88, transparent)`,
+          backgroundSize: "200% 100%",
+          animation: "shimmer 3s infinite linear",
         }}
       />
       <FadeIn delay={100}>
         <div
           style={{
-            fontSize: 14,
-            fontWeight: 600,
-            letterSpacing: 3,
+            fontSize: 13,
+            fontWeight: 700,
+            letterSpacing: 4,
             color: GOLD,
             textTransform: "uppercase",
-            marginBottom: 16,
+            marginBottom: 20,
           }}
         >
-          EGN3000L — Engineering Design
+          EGN 3000L — Engineering Design
         </div>
       </FadeIn>
       <FadeIn delay={300}>
         <div
           style={{
-            fontSize: mobile ? 26 : 40,
+            fontSize: mobile ? 28 : 44,
             fontWeight: 800,
             color: WHITE,
-            lineHeight: 1.2,
-            marginBottom: 12,
+            lineHeight: 1.15,
+            marginBottom: 14,
+            letterSpacing: -0.5,
           }}
         >
           Customer Needs &<br />
@@ -74,43 +89,48 @@ export function TitleSlide() {
       <FadeIn delay={500}>
         <div
           style={{
-            fontSize: mobile ? 15 : 18,
-            color: "rgba(255,255,255,0.7)",
-            maxWidth: 500,
-            lineHeight: 1.5,
+            fontSize: mobile ? 16 : 19,
+            color: "rgba(255,255,255,0.75)",
+            maxWidth: 520,
+            lineHeight: 1.6,
           }}
         >
-          How to figure out what matters most — and use it to pick your best
-          design.
+          Learn how to figure out what matters most — and use it to pick your
+          best design. 🚀
         </div>
       </FadeIn>
       <FadeIn delay={700}>
         <div
           style={{
-            marginTop: 32,
+            marginTop: 36,
             display: "flex",
-            gap: 8,
+            gap: 10,
             flexWrap: "wrap",
             justifyContent: "center",
           }}
         >
           {[
-            "Step 1: Identify Needs",
-            "Step 2: Weigh Them",
-            "Step 3: Build the WBA",
+            { label: "Identify Needs", emoji: "🎯" },
+            { label: "Weigh Them", emoji: "⚖️" },
+            { label: "Build the WBA", emoji: "📊" },
           ].map((s, i) => (
             <div
               key={i}
               style={{
                 background: "rgba(255,255,255,0.12)",
-                borderRadius: 20,
-                padding: "6px 16px",
-                fontSize: 13,
-                color: "rgba(255,255,255,0.85)",
-                fontWeight: 500,
+                borderRadius: 24,
+                padding: "8px 20px",
+                fontSize: 14,
+                color: "rgba(255,255,255,0.9)",
+                fontWeight: 600,
+                display: "flex",
+                alignItems: "center",
+                gap: 6,
+                backdropFilter: "blur(4px)",
+                WebkitBackdropFilter: "blur(4px)",
               }}
             >
-              {s}
+              <span>{s.emoji}</span> Step {i + 1}: {s.label}
             </div>
           ))}
         </div>

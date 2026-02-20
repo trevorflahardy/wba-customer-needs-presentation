@@ -22,7 +22,7 @@ export function WBAExampleSlide() {
   const maxTotal = Math.max(...totals);
 
   return (
-    <div style={{ padding: mobile ? "20px 12px" : "32px 40px" }}>
+    <div style={{ padding: mobile ? "20px 12px" : "36px 56px" }}>
       <FadeIn>
         <h2
           style={{
@@ -44,19 +44,38 @@ export function WBAExampleSlide() {
             marginBottom: 8,
           }}
         />
-        <p style={{ fontSize: 14, color: "#64748b", marginBottom: 16 }}>
-          Below is a sample WBA with 5 designs and 5 customer needs. Hover a
-          column to highlight it. The numbers shown are <strong>examples</strong> — yours will be different.
-        </p>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14, flexWrap: "wrap" }}>
+          <p style={{ fontSize: 14, color: "#64748b", margin: 0, lineHeight: 1.5 }}>
+            Below is a sample WBA with 5 designs and 5 customer needs. Hover a
+            column to highlight it.
+          </p>
+          <span
+            style={{
+              padding: "4px 12px",
+              borderRadius: 20,
+              border: "2px dashed #C5960C88",
+              background: "#fef3c7",
+              fontSize: 12,
+              fontWeight: 700,
+              color: "#92400e",
+              textTransform: "uppercase",
+              letterSpacing: 1,
+              whiteSpace: "nowrap",
+            }}
+          >
+            Example Only
+          </span>
+        </div>
       </FadeIn>
       <FadeIn delay={300}>
         <div
           style={{
-            borderRadius: 12,
+            borderRadius: 16,
             overflow: "auto",
             WebkitOverflowScrolling: "touch",
-            border: "1px solid #e2e8f0",
+            border: "2px dashed #e2e8f0",
             marginBottom: 16,
+            boxShadow: "0 2px 12px rgba(0,0,0,0.04)",
           }}
         >
           <table

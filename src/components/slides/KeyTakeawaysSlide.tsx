@@ -5,7 +5,7 @@ import { TEAL, GOLD, DARK, WHITE } from "../../constants/theme";
 export function KeyTakeawaysSlide() {
   const mobile = useIsMobile();
   return (
-    <div style={{ padding: mobile ? "24px 16px" : "40px 48px" }}>
+    <div style={{ padding: mobile ? "24px 16px" : "40px 56px" }}>
       <FadeIn>
         <h2
           style={{
@@ -24,7 +24,7 @@ export function KeyTakeawaysSlide() {
             height: 4,
             background: GOLD,
             borderRadius: 2,
-            marginBottom: 28,
+            marginBottom: 24,
           }}
         />
       </FadeIn>
@@ -32,7 +32,7 @@ export function KeyTakeawaysSlide() {
         style={{
           display: "flex",
           flexDirection: "column",
-          gap: 14,
+          gap: 12,
         }}
       >
         {[
@@ -63,20 +63,30 @@ export function KeyTakeawaysSlide() {
                 display: "flex",
                 alignItems: "flex-start",
                 gap: 14,
-                padding: "14px 20px",
+                padding: "16px 22px",
                 background: WHITE,
-                borderRadius: 12,
+                borderRadius: 16,
                 border: "1px solid #e2e8f0",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.03)",
+                transition: "transform 0.15s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.15s",
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLDivElement).style.transform = "translateY(-2px)";
+                (e.currentTarget as HTMLDivElement).style.boxShadow = "0 6px 20px rgba(0,0,0,0.06)";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
+                (e.currentTarget as HTMLDivElement).style.boxShadow = "0 2px 8px rgba(0,0,0,0.03)";
               }}
             >
-              <div style={{ fontSize: 24, lineHeight: 1 }}>
+              <div style={{ fontSize: 26, lineHeight: 1, flexShrink: 0 }}>
                 {item.emoji}
               </div>
               <div
                 style={{
-                  fontSize: 16,
+                  fontSize: 15,
                   color: DARK,
-                  lineHeight: 1.5,
+                  lineHeight: 1.6,
                 }}
               >
                 {item.text}
@@ -85,6 +95,29 @@ export function KeyTakeawaysSlide() {
           </FadeIn>
         ))}
       </div>
+
+      {/* Completion encouragement */}
+      <FadeIn delay={1000}>
+        <div
+          style={{
+            marginTop: 20,
+            padding: "18px 24px",
+            background: `linear-gradient(135deg, ${TEAL}, #00a86b)`,
+            borderRadius: 16,
+            textAlign: "center",
+            color: WHITE,
+          }}
+        >
+          <div style={{ fontSize: 28, marginBottom: 6 }}>🎓</div>
+          <div style={{ fontSize: 16, fontWeight: 700, marginBottom: 4 }}>
+            You're ready!
+          </div>
+          <div style={{ fontSize: 14, opacity: 0.9, lineHeight: 1.5 }}>
+            Head back to the Practice slide if you want another round, or start
+            building your team's WBA. Good luck! 💪
+          </div>
+        </div>
+      </FadeIn>
     </div>
   );
 }
