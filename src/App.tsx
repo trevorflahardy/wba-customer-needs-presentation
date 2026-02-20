@@ -36,10 +36,12 @@ export default function App() {
 
   const goTo = useCallback((idx: number) => {
     if (idx >= 0 && idx < slides.length) {
+      const activeElement = document.activeElement;
+      if (activeElement instanceof HTMLElement) {
+        activeElement.blur();
+      }
       setCurrentSlide(idx);
       setAnimKey((k) => k + 1);
-      window.scrollTo({ top: 0 });
-      slideAreaRef.current?.scrollTo({ top: 0 });
     }
   }, []);
 
@@ -61,6 +63,13 @@ export default function App() {
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
   }, [currentSlide, goTo]);
+
+  useEffect(() => {
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: "auto" });
+      slideAreaRef.current?.scrollTo({ top: 0, behavior: "auto" });
+    });
+  }, [currentSlide]);
 
   // Swipe support for mobile
   useEffect(() => {
@@ -92,10 +101,11 @@ export default function App() {
     <div
       style={{
         width: "100%",
-        minHeight: "100vh",
+        height: "100dvh",
         background: "#f8fafb",
         display: "flex",
         flexDirection: "column",
+        overflow: "hidden",
         fontFamily:
           "'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif",
       }}
@@ -192,11 +202,13 @@ export default function App() {
       <div
         style={{
           flex: 1,
+          minHeight: 0,
           display: "flex",
           alignItems: "flex-start",
           justifyContent: "center",
           padding: mobile ? "12px 8px" : "32px 24px",
           overflow: "auto",
+          overflowAnchor: "none",
         }}
         ref={slideAreaRef}
       >
