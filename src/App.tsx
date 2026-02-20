@@ -37,6 +37,7 @@ export default function App() {
     if (idx >= 0 && idx < slides.length) {
       setCurrentSlide(idx);
       setAnimKey((k) => k + 1);
+      window.scrollTo({ top: 0 });
     }
   }, []);
 

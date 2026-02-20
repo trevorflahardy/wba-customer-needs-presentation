@@ -112,6 +112,7 @@ export function WBAPracticeSlide() {
   const [showHint, setShowHint] = useState(false);
   const [attempts, setAttempts] = useState(0);
   const [totalErrors, setTotalErrors] = useState(0);
+  const [confettiCount, setConfettiCount] = useState(0);
 
   const needLabels = useMemo(() => ["CN₁", "CN₂", "CN₃", "CN₄"], []);
 
@@ -127,7 +128,9 @@ export function WBAPracticeSlide() {
       setSelectedOption(optionIdx);
       const correct = optionIdx === CONCEPT_QUESTIONS[conceptIdx].correctIdx;
       setConceptCorrect(correct);
-      if (!correct) {
+      if (correct) {
+        setConfettiCount((c) => c + 1);
+      } else {
         setConceptErrors((e) => e + 1);
         setTotalErrors((e) => e + 1);
       }
@@ -165,6 +168,7 @@ export function WBAPracticeSlide() {
     if (parsed === correctAnswer) {
       const newAnswers = [...productAnswers, parsed];
       setProductAnswers(newAnswers);
+      setConfettiCount((c) => c + 1);
       setShowHint(false);
       setAttempts(0);
       if (currentProductIdx < data.weights.length - 1) {
@@ -186,6 +190,7 @@ export function WBAPracticeSlide() {
   const checkSum = useCallback(() => {
     const parsed = parseInt(sumAnswer);
     if (parsed === data.total) {
+      setConfettiCount((c) => c + 1);
       setPhase("complete");
     } else {
       setTotalErrors((e) => e + 1);
@@ -209,6 +214,7 @@ export function WBAPracticeSlide() {
     setShowHint(false);
     setAttempts(0);
     setTotalErrors(0);
+    setConfettiCount(0);
   }, []);
 
   const handleKeyDown = useCallback(
@@ -274,7 +280,8 @@ export function WBAPracticeSlide() {
   /* ── render ── */
 
   return (
-    <div style={{ padding: mobile ? "24px 14px" : "40px 56px" }}>
+    <div style={{ padding: mobile ? "24px 14px" : "40px 56px", position: "relative" }}>
+      <Confetti trigger={confettiCount} duration={3000} />
       <FadeIn>
         <h2
           style={{
@@ -1029,7 +1036,6 @@ export function WBAPracticeSlide() {
       {/* ═══════════ COMPLETE PHASE ═══════════ */}
       {phase === "complete" && (
         <FadeIn delay={100}>
-          <Confetti trigger={phase === "complete"} duration={3000} />
           <div
             style={{
               background: `linear-gradient(135deg, #f0fdf4, #dcfce7)`,

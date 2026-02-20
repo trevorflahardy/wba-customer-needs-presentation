@@ -65,7 +65,7 @@ export function WhatIsWBASlide() {
         </div>
       </FadeIn>
       <div
-        style={{ display: "flex", gap: 20, alignItems: "flex-start", flexDirection: mobile ? "column" : "row" }}
+        style={{ display: "flex", gap: mobile ? 8 : 20, alignItems: "center", flexDirection: mobile ? "column" : "row" }}
       >
         {[
           {
@@ -133,6 +133,7 @@ export function WhatIsWBASlide() {
                     fontSize: 24,
                     color: GOLD,
                     marginTop: 8,
+                    transform: mobile ? "rotate(90deg)" : "none",
                   }}
                 >
                   →

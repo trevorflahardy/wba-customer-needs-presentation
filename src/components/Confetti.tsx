@@ -52,7 +52,7 @@ export function Confetti({
   trigger,
   duration = 2000,
 }: {
-  trigger: boolean;
+  trigger: boolean | number;
   duration?: number;
 }) {
   const [particles, setParticles] = useState<Particle[]>([]);
