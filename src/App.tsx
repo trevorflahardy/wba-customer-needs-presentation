@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { useIsMobile } from "./hooks/useIsMobile";
-import { slides, slideNames, TEAL, GOLD, DARK, WHITE } from "./constants/theme";
+import { slides, slideNames, TEAL, DARK, WHITE } from "./constants/theme";
 import { TitleSlide } from "./components/slides/TitleSlide";
 import { WhatAreCNSlide } from "./components/slides/WhatAreCNSlide";
 import { CNExamplesSlide } from "./components/slides/CNExamplesSlide";

@@ -1,179 +1,11 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { useIsMobile } from "../../hooks/useIsMobile";
 import { FadeIn } from "../FadeIn";
 import { TEAL, GOLD, DARK, GRAY_BG, WHITE } from "../../constants/theme";
 
-/* ─── Animated math breakdown when hovering a column ─── */
-function MathBreakdown({
-  colIndex,
-  weight,
-  weightLabel,
-  needLabel,
-  designs,
-}: {
-  colIndex: number;
-  weight: number;
-  weightLabel: string;
-  needLabel: string;
-  designs: { name: string; scores: number[] }[];
-}) {
-  const [visibleRows, setVisibleRows] = useState(0);
-  const products = designs.map((d) => d.scores[colIndex] * weight);
-  const sumAll = products.reduce((a, b) => a + b, 0);
-
-  useEffect(() => {
-    setVisibleRows(0);
-    let row = 0;
-    const id = setInterval(() => {
-      row++;
-      setVisibleRows(row);
-      if (row > designs.length) clearInterval(id);
-    }, 120);
-    return () => clearInterval(id);
-  }, [colIndex, designs.length]);
-
-  return (
-    <div
-      style={{
-        background: "linear-gradient(135deg, #fefce8 0%, #fff7ed 100%)",
-        borderRadius: 14,
-        padding: "16px 18px",
-        border: `2px solid ${GOLD}`,
-        boxShadow: "0 8px 32px rgba(197,150,12,0.15)",
-        animation: "mathSlideDown 0.3s ease-out",
-        minWidth: 260,
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 8,
-          marginBottom: 12,
-        }}
-      >
-        <span style={{ fontSize: 20 }}>🔍</span>
-        <span style={{ fontWeight: 800, color: DARK, fontSize: 15 }}>
-          {needLabel} Breakdown
-        </span>
-        <span
-          style={{
-            marginLeft: "auto",
-            padding: "2px 10px",
-            borderRadius: 20,
-            background: TEAL,
-            color: WHITE,
-            fontSize: 11,
-            fontWeight: 700,
-          }}
-        >
-          {weightLabel} = {weight}
-        </span>
-      </div>
-
-      {designs.map((d, di) => {
-        const score = d.scores[colIndex];
-        const product = score * weight;
-        const visible = di < visibleRows;
-        return (
-          <div
-            key={di}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 6,
-              padding: "6px 8px",
-              borderRadius: 8,
-              marginBottom: 4,
-              background: visible ? "rgba(255,255,255,0.7)" : "transparent",
-              opacity: visible ? 1 : 0,
-              transform: visible ? "translateX(0)" : "translateX(-12px)",
-              transition: "all 0.3s ease-out",
-              fontFamily: "monospace",
-              fontSize: 13,
-            }}
-          >
-            <span style={{ fontWeight: 700, color: TEAL, width: 28 }}>
-              {d.name}
-            </span>
-            <span style={{ color: "#64748b" }}>:</span>
-            <span
-              style={{
-                background: "#e0f2fe",
-                padding: "2px 6px",
-                borderRadius: 4,
-                fontWeight: 600,
-                color: "#0369a1",
-              }}
-            >
-              {score}
-            </span>
-            <span style={{ color: "#94a3b8", fontSize: 11 }}>×</span>
-            <span
-              style={{
-                background: "#e6f2ee",
-                padding: "2px 6px",
-                borderRadius: 4,
-                fontWeight: 600,
-                color: TEAL,
-              }}
-            >
-              {weight}
-            </span>
-            <span style={{ color: "#94a3b8", fontSize: 11 }}>=</span>
-            <span
-              style={{
-                fontWeight: 800,
-                color: DARK,
-                background: "#fef3c7",
-                padding: "2px 8px",
-                borderRadius: 4,
-                minWidth: 28,
-                textAlign: "center",
-              }}
-            >
-              {product}
-            </span>
-          </div>
-        );
-      })}
-
-      {/* Sum row */}
-      <div
-        style={{
-          marginTop: 10,
-          paddingTop: 10,
-          borderTop: "2px dashed #d4d4d4",
-          display: "flex",
-          alignItems: "center",
-          gap: 6,
-          opacity: visibleRows > designs.length ? 1 : 0.3,
-          transition: "opacity 0.4s",
-        }}
-      >
-        <span style={{ fontSize: 14 }}>📊</span>
-        <span style={{ fontSize: 12, color: "#64748b", fontWeight: 600 }}>
-          Column products:
-        </span>
-        <span
-          style={{
-            fontFamily: "monospace",
-            fontSize: 13,
-            fontWeight: 700,
-            color: DARK,
-          }}
-        >
-          {products.join(" + ")} = {sumAll}
-        </span>
-      </div>
-    </div>
-  );
-}
-
 export function WBAExampleSlide() {
   const mobile = useIsMobile();
   const [highlight, setHighlight] = useState<number | null>(null);
-  const hoverTimeout = useRef<ReturnType<typeof setTimeout>>();
   const needs = ["CN₁", "CN₂", "CN₃", "CN₄", "CN₅"];
   const weights = ["W₁", "W₂", "W₃", "W₄", "W₅"];
   const weightVals = [8, 6, 7, 9, 5];
@@ -188,14 +20,6 @@ export function WBAExampleSlide() {
     scores.reduce((sum: number, s: number, i: number) => sum + s * weightVals[i], 0);
   const totals = designs.map((d) => calcTotal(d.scores));
   const maxTotal = Math.max(...totals);
-
-  const handleMouseEnter = (i: number) => {
-    clearTimeout(hoverTimeout.current);
-    setHighlight(i);
-  };
-  const handleMouseLeave = () => {
-    hoverTimeout.current = setTimeout(() => setHighlight(null), 200);
-  };
 
   return (
     <div style={{ padding: mobile ? "20px 12px" : "36px 56px" }}>
@@ -222,8 +46,7 @@ export function WBAExampleSlide() {
         />
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14, flexWrap: "wrap" }}>
           <p style={{ fontSize: 14, color: "#64748b", margin: 0, lineHeight: 1.5 }}>
-            Below is a sample WBA with 5 designs and 5 customer needs.{" "}
-            <strong>Hover a column</strong> to see the math animated step-by-step!
+            Below is a sample WBA with 5 designs and 5 customer needs.
           </p>
           <span
             style={{
@@ -281,28 +104,14 @@ export function WBAExampleSlide() {
                       cursor: "pointer",
                       background:
                         highlight === i ? GOLD : "transparent",
-                      transition: "all 0.25s ease",
+                      transition: "background 0.2s",
                       fontFamily: "monospace",
                       fontSize: mobile ? 13 : 15,
-                      transform: highlight === i ? "scale(1.08)" : "scale(1)",
-                      borderRadius: highlight === i ? 6 : 0,
                     }}
-                    onMouseEnter={() => handleMouseEnter(i)}
-                    onMouseLeave={handleMouseLeave}
+                    onMouseEnter={() => setHighlight(i)}
+                    onMouseLeave={() => setHighlight(null)}
                   >
                     {n}
-                    {highlight === i && (
-                      <div
-                        style={{
-                          fontSize: 8,
-                          opacity: 0.85,
-                          marginTop: 2,
-                          letterSpacing: 1,
-                        }}
-                      >
-                        ▼ MATH ▼
-                      </div>
-                    )}
                   </th>
                 ))}
                 <th
@@ -338,11 +147,8 @@ export function WBAExampleSlide() {
                         highlight === i
                           ? "#fef3c7"
                           : "transparent",
-                      transition: "all 0.25s ease",
-                      transform: highlight === i ? "scale(1.15)" : "scale(1)",
+                      transition: "background 0.2s",
                     }}
-                    onMouseEnter={() => handleMouseEnter(i)}
-                    onMouseLeave={handleMouseLeave}
                   >
                     <div style={{ fontFamily: "monospace", fontSize: 11, color: "#64748b", marginBottom: 2 }}>
                       {weights[i]}
@@ -399,17 +205,13 @@ export function WBAExampleSlide() {
                             highlight === si
                               ? "#fefce8"
                               : "transparent",
-                          transition: "all 0.25s ease",
-                          transform: highlight === si ? "scale(1.1)" : "scale(1)",
+                          transition: "background 0.2s",
                         }}
-                        onMouseEnter={() => handleMouseEnter(si)}
-                        onMouseLeave={handleMouseLeave}
                       >
                         <span
                           style={{
                             fontWeight: 600,
-                            color: highlight === si ? "#92400e" : DARK,
-                            transition: "color 0.2s",
+                            color: DARK,
                           }}
                         >
                           {s}
@@ -417,26 +219,12 @@ export function WBAExampleSlide() {
                         <span
                           style={{
                             fontSize: 11,
-                            color: highlight === si ? GOLD : "#94a3b8",
+                            color: "#94a3b8",
                             marginLeft: 2,
-                            fontWeight: highlight === si ? 700 : 400,
-                            transition: "all 0.2s",
                           }}
                         >
                           ×{weightVals[si]}
                         </span>
-                        {highlight === si && (
-                          <div
-                            style={{
-                              fontSize: 11,
-                              fontWeight: 800,
-                              color: TEAL,
-                              animation: "popIn 0.25s ease-out",
-                            }}
-                          >
-                            = {s * weightVals[si]}
-                          </div>
-                        )}
                       </td>
                     ))}
                     <td
@@ -457,19 +245,6 @@ export function WBAExampleSlide() {
           </table>
         </div>
       </FadeIn>
-
-      {/* Animated math breakdown panel - appears on column hover */}
-      {highlight !== null && (
-        <div style={{ marginBottom: 16 }}>
-          <MathBreakdown
-            colIndex={highlight}
-            weight={weightVals[highlight]}
-            weightLabel={weights[highlight]}
-            needLabel={needs[highlight]}
-            designs={designs}
-          />
-        </div>
-      )}
 
       {/* Candidate design callout */}
       <FadeIn delay={600}>
@@ -528,9 +303,8 @@ export function WBAExampleSlide() {
                 marginTop: 4,
               }}
             >
-              <strong>Hover any column header</strong> to see each design's
-              score × weight animated step-by-step! The total column is
-              the sum of all products for that row.
+              Each cell shows <strong>score × weight</strong>. The total
+              is the sum of all products for that design row.
             </div>
           </div>
           <div
