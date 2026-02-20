@@ -138,17 +138,9 @@ function BullFace({ mood, size = 56 }: { mood: Mood; size?: number }) {
 
       {/* Snout */}
       <ellipse cx={cx} cy={cy + r * 0.42} rx={r * 0.44} ry={r * 0.28} fill={snoutColor} />
-      {/* Nose ring (subtle) */}
-      <path
-        d={`M${cx - r * 0.1} ${cy + r * 0.52} Q${cx} ${cy + r * 0.62} ${cx + r * 0.1} ${cy + r * 0.52}`}
-        fill="none"
-        stroke="#9CA3AF"
-        strokeWidth={1.2}
-        strokeLinecap="round"
-      />
       {/* Nostrils */}
-      <ellipse cx={cx - r * 0.16} cy={cy + r * 0.42} rx={r * 0.08} ry={r * 0.055} fill={nostrilColor} />
-      <ellipse cx={cx + r * 0.16} cy={cy + r * 0.42} rx={r * 0.08} ry={r * 0.055} fill={nostrilColor} />
+      <ellipse cx={cx - r * 0.13} cy={cy + r * 0.38} rx={r * 0.06} ry={r * 0.04} fill={nostrilColor} />
+      <ellipse cx={cx + r * 0.13} cy={cy + r * 0.38} rx={r * 0.06} ry={r * 0.04} fill={nostrilColor} />
 
       {/* ── Eyes by mood ── */}
       {mood === "wink" ? (
@@ -234,25 +226,25 @@ function BullFace({ mood, size = 56 }: { mood: Mood; size?: number }) {
         </>
       )}
 
-      {/* Mouth — mood-dependent */}
+      {/* Mouth — below snout */}
       {mood === "excited" ? (
         /* Big open smile */
         <path
-          d={`M${cx - r * 0.18} ${cy + r * 0.24} Q${cx} ${cy + r * 0.45} ${cx + r * 0.18} ${cy + r * 0.24}`}
+          d={`M${cx - r * 0.18} ${cy + r * 0.52} Q${cx} ${cy + r * 0.68} ${cx + r * 0.18} ${cy + r * 0.52}`}
           fill="#EF4444" stroke={mouthColor} strokeWidth={1}
         />
       ) : mood === "surprised" ? (
         /* Small O shape */
-        <ellipse cx={cx} cy={cy + r * 0.28} rx={r * 0.08} ry={r * 0.1} fill={mouthColor} />
+        <ellipse cx={cx} cy={cy + r * 0.55} rx={r * 0.07} ry={r * 0.09} fill={mouthColor} />
       ) : mood === "happy" || mood === "wink" || mood === "cool" ? (
         /* Smile */
         <path
-          d={`M${cx - r * 0.15} ${cy + r * 0.24} Q${cx} ${cy + r * 0.38} ${cx + r * 0.15} ${cy + r * 0.24}`}
+          d={`M${cx - r * 0.14} ${cy + r * 0.52} Q${cx} ${cy + r * 0.64} ${cx + r * 0.14} ${cy + r * 0.52}`}
           fill="none" stroke={mouthColor} strokeWidth={1.5} strokeLinecap="round"
         />
       ) : (
         /* Neutral */
-        <line x1={cx - r * 0.08} y1={cy + r * 0.27} x2={cx + r * 0.08} y2={cy + r * 0.27}
+        <line x1={cx - r * 0.08} y1={cy + r * 0.54} x2={cx + r * 0.08} y2={cy + r * 0.54}
           stroke={mouthColor} strokeWidth={1.5} strokeLinecap="round" />
       )}
 
