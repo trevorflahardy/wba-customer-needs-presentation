@@ -39,13 +39,13 @@ export function CNTableSlide() {
             overflow: "auto",
             WebkitOverflowScrolling: "touch",
             border: "1px solid #e2e8f0",
-            marginBottom: 24,
+            marginBottom: 20,
           }}
         >
           <table
             style={{
               width: "100%",
-              minWidth: mobile ? 520 : undefined,
+              minWidth: mobile ? 400 : undefined,
               borderCollapse: "collapse",
               fontSize: mobile ? 13 : 15,
             }}
@@ -65,42 +65,17 @@ export function CNTableSlide() {
                 <th
                   style={{ padding: "14px 20px", textAlign: "center" }}
                 >
-                  Weight
-                </th>
-                <th
-                  style={{ padding: "14px 20px", textAlign: "left" }}
-                >
-                  Why This Weight?
+                  Weight (1–10)
                 </th>
               </tr>
             </thead>
             <tbody>
               {[
-                {
-                  n: "Safety",
-                  w: 9,
-                  why: "Top priority — K-12 students are the end users",
-                },
-                {
-                  n: "Cost",
-                  w: 7,
-                  why: "Must stay within the class budget",
-                },
-                {
-                  n: "Durability",
-                  w: 6,
-                  why: "Robot needs to survive repeated demos",
-                },
-                {
-                  n: "Ease of Use",
-                  w: 8,
-                  why: "Young students should operate it independently",
-                },
-                {
-                  n: "Performance",
-                  w: 5,
-                  why: "Important, but less critical than safety",
-                },
+                { n: "CN₁", w: "W₁" },
+                { n: "CN₂", w: "W₂" },
+                { n: "CN₃", w: "W₃" },
+                { n: "CN₄", w: "W₄" },
+                { n: "CN₅", w: "W₅" },
               ].map((row, i) => (
                 <tr
                   key={i}
@@ -123,6 +98,8 @@ export function CNTableSlide() {
                       padding: "12px 20px",
                       fontWeight: 600,
                       color: DARK,
+                      fontFamily: "monospace",
+                      fontSize: mobile ? 14 : 16,
                     }}
                   >
                     {row.n}
@@ -138,19 +115,11 @@ export function CNTableSlide() {
                         padding: "4px 14px",
                         fontWeight: 700,
                         fontSize: 14,
+                        fontFamily: "monospace",
                       }}
                     >
                       {row.w}
                     </span>
-                  </td>
-                  <td
-                    style={{
-                      padding: "12px 20px",
-                      color: "#64748b",
-                      fontSize: 14,
-                    }}
-                  >
-                    {row.why}
                   </td>
                 </tr>
               ))}
@@ -161,7 +130,7 @@ export function CNTableSlide() {
                 }}
               >
                 <td
-                  colSpan={4}
+                  colSpan={3}
                   style={{
                     padding: "12px 20px",
                     fontWeight: 600,
@@ -177,7 +146,56 @@ export function CNTableSlide() {
           </table>
         </div>
       </FadeIn>
-      <FadeIn delay={600}>
+
+      {/* Justify your weightings callout */}
+      <FadeIn delay={500}>
+        <div
+          style={{
+            padding: "16px 20px",
+            background: `linear-gradient(135deg, ${GOLD}12, ${GOLD}22)`,
+            borderRadius: 12,
+            border: `2px solid ${GOLD}44`,
+            marginBottom: 20,
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "flex-start",
+              gap: 12,
+            }}
+          >
+            <div style={{ fontSize: 24, lineHeight: 1, flexShrink: 0 }}>⚠️</div>
+            <div>
+              <div
+                style={{
+                  fontSize: 15,
+                  fontWeight: 700,
+                  color: "#92400e",
+                  marginBottom: 6,
+                }}
+              >
+                You Must Justify Your Weightings
+              </div>
+              <div
+                style={{
+                  fontSize: 13,
+                  color: "#78350f",
+                  lineHeight: 1.6,
+                }}
+              >
+                For each customer need, your team must <strong>explain why</strong> you
+                assigned that specific weight. This rationale should be included in your
+                report. A weight without a justification is incomplete — your engineering
+                judgment must be backed by reasoning that considers your stakeholder's
+                priorities and project constraints.
+              </div>
+            </div>
+          </div>
+        </div>
+      </FadeIn>
+
+      <FadeIn delay={700}>
         <div style={{ display: "flex", gap: 14, flexDirection: mobile ? "column" : "row" }}>
           <div
             style={{

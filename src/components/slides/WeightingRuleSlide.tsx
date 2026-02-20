@@ -18,11 +18,11 @@ export function WeightingRuleSlide() {
   }, []);
 
   const weights = [
-    { need: "Safety", w: 9, color: "#ef4444" },
-    { need: "Cost", w: 7, color: "#f59e0b" },
-    { need: "Durability", w: 6, color: "#3b82f6" },
-    { need: "Ease of Use", w: 8, color: "#8b5cf6" },
-    { need: "Performance", w: 5, color: "#10b981" },
+    { need: "CN₁", w: 9, color: "#ef4444" },
+    { need: "CN₂", w: 7, color: "#f59e0b" },
+    { need: "CN₃", w: 6, color: "#3b82f6" },
+    { need: "CN₄", w: 8, color: "#8b5cf6" },
+    { need: "CN₅", w: 5, color: "#10b981" },
   ];
 
   return (
@@ -83,7 +83,7 @@ export function WeightingRuleSlide() {
                 marginBottom: 16,
               }}
             >
-              Example: Robot Project Weightings
+              Example: Weighting Customer Needs
             </div>
           </FadeIn>
           {weights.map((w, i) => (

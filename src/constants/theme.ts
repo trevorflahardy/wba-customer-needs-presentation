@@ -14,7 +14,7 @@ export const slides = [
     { id: "what-is-wba", type: "what-is-wba" },
     { id: "wba-steps", type: "wba-steps" },
     { id: "wba-example", type: "wba-example" },
-    { id: "wba-interactive", type: "wba-interactive" },
+    { id: "wba-practice", type: "wba-practice" },
     { id: "key-takeaways", type: "key-takeaways" },
 ];
 
@@ -27,6 +27,6 @@ export const slideNames = [
     "What Is a WBA?",
     "WBA Steps",
     "WBA Example",
-    "Try It Yourself",
+    "Practice Quiz",
     "Key Takeaways",
 ];

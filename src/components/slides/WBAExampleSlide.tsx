@@ -6,26 +6,23 @@ import { TEAL, GOLD, DARK, GRAY_BG, WHITE } from "../../constants/theme";
 export function WBAExampleSlide() {
   const mobile = useIsMobile();
   const [highlight, setHighlight] = useState<number | null>(null);
-  const needs = [
-    "Safety",
-    "Cost",
-    "Durability",
-    "Ease of Use",
-    "Performance",
-  ];
-  const weights = [9, 7, 6, 8, 5];
+  const needs = ["CN₁", "CN₂", "CN₃", "CN₄", "CN₅"];
+  const weights = ["W₁", "W₂", "W₃", "W₄", "W₅"];
+  const weightVals = [8, 6, 7, 9, 5];
   const designs = [
-    { name: "Design A", scores: [8, 6, 7, 5, 9] },
-    { name: "Design B", scores: [6, 9, 5, 8, 4] },
-    { name: "Design C", scores: [9, 4, 8, 6, 7] },
+    { name: "D₁", scores: [7, 5, 8, 6, 9] },
+    { name: "D₂", scores: [6, 8, 5, 7, 4] },
+    { name: "D₃", scores: [9, 4, 6, 8, 7] },
+    { name: "D₄", scores: [5, 9, 7, 4, 8] },
+    { name: "D₅", scores: [8, 7, 9, 5, 6] },
   ];
   const calcTotal = (scores: number[]) =>
-    scores.reduce((sum: number, s: number, i: number) => sum + s * weights[i], 0);
+    scores.reduce((sum: number, s: number, i: number) => sum + s * weightVals[i], 0);
   const totals = designs.map((d) => calcTotal(d.scores));
   const maxTotal = Math.max(...totals);
 
   return (
-    <div style={{ padding: mobile ? "24px 12px" : "36px 44px" }}>
+    <div style={{ padding: mobile ? "20px 12px" : "32px 40px" }}>
       <FadeIn>
         <h2
           style={{
@@ -36,7 +33,7 @@ export function WBAExampleSlide() {
             marginTop: 0,
           }}
         >
-          WBA Example: Robot Project
+          WBA Example with Anonymous Data
         </h2>
         <div
           style={{
@@ -44,9 +41,13 @@ export function WBAExampleSlide() {
             height: 4,
             background: GOLD,
             borderRadius: 2,
-            marginBottom: 20,
+            marginBottom: 8,
           }}
         />
+        <p style={{ fontSize: 14, color: "#64748b", marginBottom: 16 }}>
+          Below is a sample WBA with 5 designs and 5 customer needs. Hover a
+          column to highlight it. The numbers shown are <strong>examples</strong> — yours will be different.
+        </p>
       </FadeIn>
       <FadeIn delay={300}>
         <div
@@ -55,13 +56,13 @@ export function WBAExampleSlide() {
             overflow: "auto",
             WebkitOverflowScrolling: "touch",
             border: "1px solid #e2e8f0",
-            marginBottom: 20,
+            marginBottom: 16,
           }}
         >
           <table
             style={{
               width: "100%",
-              minWidth: mobile ? 560 : undefined,
+              minWidth: mobile ? 600 : undefined,
               borderCollapse: "collapse",
               fontSize: mobile ? 12 : 14,
             }}
@@ -70,7 +71,7 @@ export function WBAExampleSlide() {
               <tr style={{ background: TEAL, color: WHITE }}>
                 <th
                   style={{
-                    padding: "12px 16px",
+                    padding: "12px 14px",
                     textAlign: "left",
                   }}
                 >
@@ -86,6 +87,8 @@ export function WBAExampleSlide() {
                       background:
                         highlight === i ? GOLD : "transparent",
                       transition: "background 0.2s",
+                      fontFamily: "monospace",
+                      fontSize: mobile ? 13 : 15,
                     }}
                     onMouseEnter={() => setHighlight(i)}
                     onMouseLeave={() => setHighlight(null)}
@@ -95,7 +98,7 @@ export function WBAExampleSlide() {
                 ))}
                 <th
                   style={{
-                    padding: "12px 16px",
+                    padding: "12px 14px",
                     textAlign: "center",
                     fontWeight: 800,
                   }}
@@ -106,7 +109,7 @@ export function WBAExampleSlide() {
               <tr style={{ background: "#e6f2ee" }}>
                 <td
                   style={{
-                    padding: "8px 16px",
+                    padding: "8px 14px",
                     fontWeight: 700,
                     color: TEAL,
                     fontSize: 13,
@@ -114,7 +117,7 @@ export function WBAExampleSlide() {
                 >
                   Weights
                 </td>
-                {weights.map((w, i) => (
+                {weightVals.map((w, i) => (
                   <td
                     key={i}
                     style={{
@@ -129,12 +132,15 @@ export function WBAExampleSlide() {
                       transition: "background 0.2s",
                     }}
                   >
+                    <div style={{ fontFamily: "monospace", fontSize: 11, color: "#64748b", marginBottom: 2 }}>
+                      {weights[i]}
+                    </div>
                     {w}
                   </td>
                 ))}
                 <td
                   style={{
-                    padding: "8px 16px",
+                    padding: "8px 14px",
                     textAlign: "center",
                     fontWeight: 800,
                     color: GOLD,
@@ -162,9 +168,11 @@ export function WBAExampleSlide() {
                   >
                     <td
                       style={{
-                        padding: "12px 16px",
+                        padding: "10px 14px",
                         fontWeight: 700,
                         color: DARK,
+                        fontFamily: "monospace",
+                        fontSize: mobile ? 13 : 15,
                       }}
                     >
                       {d.name} {isWinner && "🏆"}
@@ -173,7 +181,7 @@ export function WBAExampleSlide() {
                       <td
                         key={si}
                         style={{
-                          padding: "12px 10px",
+                          padding: "10px 10px",
                           textAlign: "center",
                           background:
                             highlight === si
@@ -197,16 +205,16 @@ export function WBAExampleSlide() {
                             marginLeft: 2,
                           }}
                         >
-                          ×{weights[si]}
+                          ×{weightVals[si]}
                         </span>
                       </td>
                     ))}
                     <td
                       style={{
-                        padding: "12px 16px",
+                        padding: "10px 14px",
                         textAlign: "center",
                         fontWeight: 800,
-                        fontSize: 18,
+                        fontSize: 17,
                         color: isWinner ? TEAL : DARK,
                       }}
                     >
@@ -219,22 +227,52 @@ export function WBAExampleSlide() {
           </table>
         </div>
       </FadeIn>
+
+      {/* Candidate design callout */}
       <FadeIn delay={600}>
+        <div
+          style={{
+            padding: "14px 20px",
+            background: "#f0fdf4",
+            borderRadius: 12,
+            border: "2px solid #22c55e",
+            marginBottom: 14,
+            display: "flex",
+            alignItems: "center",
+            gap: 12,
+          }}
+        >
+          <div style={{ fontSize: 24 }}>🏆</div>
+          <div>
+            <div style={{ fontSize: 14, fontWeight: 700, color: "#166534" }}>
+              Highest Total = Candidate Design
+            </div>
+            <div style={{ fontSize: 13, color: "#14532d", lineHeight: 1.5, marginTop: 2 }}>
+              The design with the <strong>highest WBA total score</strong> is
+              your <strong>candidate design</strong> — the one your team should
+              move forward with, unless there's a justified reason not to (which
+              you must explain).
+            </div>
+          </div>
+        </div>
+      </FadeIn>
+
+      <FadeIn delay={800}>
         <div style={{ display: "flex", gap: 14, flexDirection: mobile ? "column" : "row" }}>
           <div
             style={{
               flex: 1,
-              background: "#f0fdf4",
+              background: "#eff6ff",
               borderRadius: 10,
-              padding: 16,
-              borderLeft: "3px solid #22c55e",
+              padding: 14,
+              borderLeft: "3px solid #3b82f6",
             }}
           >
             <div
               style={{
                 fontSize: 13,
                 fontWeight: 700,
-                color: "#166534",
+                color: "#1e40af",
               }}
             >
               Reading the Table
@@ -247,40 +285,41 @@ export function WBAExampleSlide() {
                 marginTop: 4,
               }}
             >
-              Hover over a column to highlight it. Each cell shows{" "}
-              <strong>rating × weight</strong>. The total is the sum of
-              all products.
+              Hover a column to highlight it. Each cell shows{" "}
+              <strong>score × weight</strong>. The total is the sum of
+              all products for that design row.
             </div>
           </div>
           <div
             style={{
               flex: 1,
-              background: "#eff6ff",
+              background: "#f5f3ff",
               borderRadius: 10,
-              padding: 16,
-              borderLeft: "3px solid #3b82f6",
+              padding: 14,
+              borderLeft: "3px solid #8b5cf6",
             }}
           >
             <div
               style={{
                 fontSize: 13,
                 fontWeight: 700,
-                color: "#1e40af",
+                color: "#5b21b6",
               }}
             >
-              Example Calc (Design A)
+              Example Calc ({designs[0].name})
             </div>
             <div
               style={{
                 fontSize: 12,
-                color: "#1e3a5f",
+                color: "#4c1d95",
                 lineHeight: 1.5,
                 marginTop: 4,
                 fontFamily: "monospace",
               }}
             >
-              (9×8)+(7×6)+(6×7)+(8×5)+(5×9) = 72+42+42+40+45 ={" "}
-              <strong>241</strong>
+              {designs[0].scores.map((s, i) => `(${weightVals[i]}×${s})`).join(" + ")} ={" "}
+              {designs[0].scores.map((s, i) => s * weightVals[i]).join(" + ")} ={" "}
+              <strong>{calcTotal(designs[0].scores)}</strong>
             </div>
           </div>
         </div>

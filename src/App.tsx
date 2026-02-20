@@ -9,7 +9,7 @@ import { CNTableSlide } from "./components/slides/CNTableSlide";
 import { WhatIsWBASlide } from "./components/slides/WhatIsWBASlide";
 import { WBAStepsSlide } from "./components/slides/WBAStepsSlide";
 import { WBAExampleSlide } from "./components/slides/WBAExampleSlide";
-import { WBAInteractiveSlide } from "./components/slides/WBAInteractiveSlide";
+import { WBAPracticeSlide } from "./components/slides/WBAPracticeSlide";
 import { KeyTakeawaysSlide } from "./components/slides/KeyTakeawaysSlide";
 
 const slideComponents = {
@@ -21,7 +21,7 @@ const slideComponents = {
   "what-is-wba": WhatIsWBASlide,
   "wba-steps": WBAStepsSlide,
   "wba-example": WBAExampleSlide,
-  "wba-interactive": WBAInteractiveSlide,
+  "wba-practice": WBAPracticeSlide,
   "key-takeaways": KeyTakeawaysSlide,
 };
 
