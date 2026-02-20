@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useIsMobile } from "./hooks/useIsMobile";
 import { slides, slideNames, TEAL, DARK, WHITE } from "./constants/theme";
 import { TitleSlide } from "./components/slides/TitleSlide";
@@ -32,12 +32,14 @@ export default function App() {
   const mobile = useIsMobile();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [animKey, setAnimKey] = useState(0);
+  const slideAreaRef = useRef<HTMLDivElement>(null);
 
   const goTo = useCallback((idx: number) => {
     if (idx >= 0 && idx < slides.length) {
       setCurrentSlide(idx);
       setAnimKey((k) => k + 1);
       window.scrollTo({ top: 0 });
+      slideAreaRef.current?.scrollTo({ top: 0 });
     }
   }, []);
 
@@ -196,6 +198,7 @@ export default function App() {
           padding: mobile ? "12px 8px" : "32px 24px",
           overflow: "auto",
         }}
+        ref={slideAreaRef}
       >
         <div
           key={animKey}

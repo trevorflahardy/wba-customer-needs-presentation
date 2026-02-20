@@ -228,10 +228,10 @@ function BullFace({ mood, size = 56 }: { mood: Mood; size?: number }) {
 
       {/* Mouth — below snout */}
       {mood === "excited" ? (
-        /* Big open smile */
+        /* Wide happy grin — stroke only */
         <path
-          d={`M${cx - r * 0.18} ${cy + r * 0.52} Q${cx} ${cy + r * 0.68} ${cx + r * 0.18} ${cy + r * 0.52}`}
-          fill="#EF4444" stroke={mouthColor} strokeWidth={1}
+          d={`M${cx - r * 0.2} ${cy + r * 0.5} Q${cx} ${cy + r * 0.66} ${cx + r * 0.2} ${cy + r * 0.5}`}
+          fill="none" stroke={mouthColor} strokeWidth={2} strokeLinecap="round"
         />
       ) : mood === "surprised" ? (
         /* Small O shape */

@@ -30,18 +30,18 @@ const COLORS = [
 function createParticles(count: number, originX: number, originY: number): Particle[] {
   return Array.from({ length: count }, (_, i) => {
     const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.8;
-    const speed = 3 + Math.random() * 8;
+    const speed = 1.5 + Math.random() * 4;
     const shapes: Particle["shape"][] = ["circle", "square", "star"];
     return {
       id: i,
-      x: originX,
-      y: originY,
+      x: originX + (Math.random() - 0.5) * 30,
+      y: originY + (Math.random() - 0.5) * 10,
       color: COLORS[Math.floor(Math.random() * COLORS.length)],
-      size: 4 + Math.random() * 8,
+      size: 5 + Math.random() * 10,
       rotation: Math.random() * 360,
       velocityX: Math.cos(angle) * speed,
-      velocityY: Math.sin(angle) * speed - 4,
-      rotationSpeed: (Math.random() - 0.5) * 15,
+      velocityY: Math.sin(angle) * speed - 2.5,
+      rotationSpeed: (Math.random() - 0.5) * 10,
       shape: shapes[Math.floor(Math.random() * shapes.length)],
       opacity: 1,
     };
@@ -65,12 +65,12 @@ export function Confetti({
       return;
     }
 
-    const p = createParticles(60, 50, 40);
+    const p = createParticles(150, 50, 30);
     setParticles(p);
     startRef.current = performance.now();
 
-    const gravity = 0.15;
-    const friction = 0.98;
+    const gravity = 0.08;
+    const friction = 0.99;
 
     function animate() {
       const elapsed = performance.now() - startRef.current;
