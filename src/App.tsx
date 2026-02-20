@@ -11,6 +11,7 @@ import { WBAStepsSlide } from "./components/slides/WBAStepsSlide";
 import { WBAExampleSlide } from "./components/slides/WBAExampleSlide";
 import { WBAPracticeSlide } from "./components/slides/WBAPracticeSlide";
 import { KeyTakeawaysSlide } from "./components/slides/KeyTakeawaysSlide";
+import { Mascot } from "./components/Mascot";
 
 const slideComponents = {
   title: TitleSlide,
@@ -182,39 +183,6 @@ export default function App() {
           </div>
         </div>
 
-        {/* Slide dots below progress */}
-        <div
-          style={{
-            display: "flex",
-            gap: mobile ? 3 : 5,
-            justifyContent: "center",
-            padding: mobile ? "0 12px 8px" : "0 32px 10px",
-          }}
-        >
-          {slides.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => goTo(i)}
-              title={slideNames[i]}
-              aria-label={`Go to ${slideNames[i]}`}
-              style={{
-                width: i === currentSlide ? (mobile ? 24 : 32) : (mobile ? 10 : 12),
-                height: mobile ? 6 : 8,
-                borderRadius: 4,
-                background:
-                  i === currentSlide
-                    ? TEAL
-                    : i < currentSlide
-                      ? GOLD
-                      : "#dde3ea",
-                border: "none",
-                cursor: "pointer",
-                transition: "all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)",
-                transform: i === currentSlide ? "scaleY(1.3)" : "scaleY(1)",
-              }}
-            />
-          ))}
-        </div>
       </div>
 
       {/* Slide area — expanded website sizing */}
@@ -318,6 +286,12 @@ export default function App() {
             : (mobile ? "→" : "Continue →")}
         </button>
       </div>
+
+      {/* Mascot helper character */}
+      <Mascot
+        slideType={slides[currentSlide].type}
+        slideIndex={currentSlide}
+      />
     </div>
   );
 }

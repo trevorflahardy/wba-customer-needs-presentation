@@ -221,3 +221,55 @@ tr {
   background: rgba(0, 103, 71, 0.15);
   color: inherit;
 }
+
+/* Mascot animations */
+@keyframes mascotBounceIn {
+  0% {
+    transform: scale(0) translateY(40px);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.1) translateY(-4px);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes mascotBob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Column hover math breakdown */
+@keyframes mathSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes confettiBurst {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}

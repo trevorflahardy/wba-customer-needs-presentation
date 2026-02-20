@@ -1,6 +1,7 @@
 import { useState, useCallback, useMemo } from "react";
 import { useIsMobile } from "../../hooks/useIsMobile";
 import { FadeIn } from "../FadeIn";
+import { Confetti } from "../Confetti";
 import { TEAL, TEAL_LIGHT, GOLD, DARK, WHITE } from "../../constants/theme";
 
 /* ── helpers ───────────────────────────────────────────── */
@@ -1028,6 +1029,7 @@ export function WBAPracticeSlide() {
       {/* ═══════════ COMPLETE PHASE ═══════════ */}
       {phase === "complete" && (
         <FadeIn delay={100}>
+          <Confetti trigger={phase === "complete"} duration={3000} />
           <div
             style={{
               background: `linear-gradient(135deg, #f0fdf4, #dcfce7)`,
