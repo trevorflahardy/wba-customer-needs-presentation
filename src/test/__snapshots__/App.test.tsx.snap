@@ -1,0 +1,164 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`App > renders the title slide by default 1`] = `
+<div>
+  <div
+    style="width: 100%; min-height: 100vh; background: rgb(241, 245, 249); display: flex; flex-direction: column; font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;"
+  >
+    <div
+      style="display: flex; align-items: center; justify-content: space-between; padding: 10px 24px; background: rgb(255, 255, 255); border-bottom: 1px solid rgb(226, 232, 240); flex-shrink: 0; gap: 8px;"
+    >
+      <div
+        style="font-size: 13px; font-weight: 700; color: rgb(0, 103, 71); letter-spacing: 1px; flex-shrink: 0;"
+      >
+        EGN3000L
+      </div>
+      <div
+        style="display: flex; gap: 4px; flex-wrap: wrap; justify-content: center; flex: 1 1 0%;"
+      >
+        <button
+          style="width: 28px; height: 10px; border-radius: 5px; background: rgb(0, 103, 71); border: medium; cursor: pointer; transition: all 0.3s ease;"
+          title="Title"
+        />
+        <button
+          style="width: 10px; height: 10px; border-radius: 5px; background: rgb(203, 213, 225); border: medium; cursor: pointer; transition: all 0.3s ease;"
+          title="What Are Customer Needs?"
+        />
+        <button
+          style="width: 10px; height: 10px; border-radius: 5px; background: rgb(203, 213, 225); border: medium; cursor: pointer; transition: all 0.3s ease;"
+          title="Examples"
+        />
+        <button
+          style="width: 10px; height: 10px; border-radius: 5px; background: rgb(203, 213, 225); border: medium; cursor: pointer; transition: all 0.3s ease;"
+          title="Weighting Needs"
+        />
+        <button
+          style="width: 10px; height: 10px; border-radius: 5px; background: rgb(203, 213, 225); border: medium; cursor: pointer; transition: all 0.3s ease;"
+          title="Customer Needs Table"
+        />
+        <button
+          style="width: 10px; height: 10px; border-radius: 5px; background: rgb(203, 213, 225); border: medium; cursor: pointer; transition: all 0.3s ease;"
+          title="What Is a WBA?"
+        />
+        <button
+          style="width: 10px; height: 10px; border-radius: 5px; background: rgb(203, 213, 225); border: medium; cursor: pointer; transition: all 0.3s ease;"
+          title="WBA Steps"
+        />
+        <button
+          style="width: 10px; height: 10px; border-radius: 5px; background: rgb(203, 213, 225); border: medium; cursor: pointer; transition: all 0.3s ease;"
+          title="WBA Example"
+        />
+        <button
+          style="width: 10px; height: 10px; border-radius: 5px; background: rgb(203, 213, 225); border: medium; cursor: pointer; transition: all 0.3s ease;"
+          title="Try It Yourself"
+        />
+        <button
+          style="width: 10px; height: 10px; border-radius: 5px; background: rgb(203, 213, 225); border: medium; cursor: pointer; transition: all 0.3s ease;"
+          title="Key Takeaways"
+        />
+      </div>
+      <div
+        style="font-size: 13px; color: rgb(148, 163, 184); flex-shrink: 0;"
+      >
+        1
+         / 
+        10
+      </div>
+    </div>
+    <div
+      style="flex: 1 1 0%; display: flex; align-items: center; justify-content: center; padding: 24px; overflow: auto;"
+    >
+      <div
+        style="width: 100%; max-width: 960px; min-height: 540px; background: rgb(255, 255, 255); border-radius: 16px; box-shadow: 0 8px 40px rgba(0,0,0,0.08); overflow: hidden; position: relative;"
+      >
+        <div
+          style="height: 100%; min-height: 500px; display: flex; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(135deg, rgb(26, 35, 50) 0%, rgb(0, 103, 71) 100%); border-radius: 16px; padding: 48px; text-align: center; position: relative; overflow: hidden;"
+        >
+          <div
+            style="position: absolute; top: -60px; right: -60px; width: 200px; height: 200px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.1);"
+          />
+          <div
+            style="position: absolute; bottom: -40px; left: -40px; width: 160px; height: 160px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.08);"
+          />
+          <div
+            class=""
+            style="opacity: 0; transform: translateY(18px); transition: opacity 0.5s ease, transform 0.5s ease;"
+          >
+            <div
+              style="font-size: 14px; font-weight: 600; letter-spacing: 3px; color: rgb(197, 150, 12); text-transform: uppercase; margin-bottom: 16px;"
+            >
+              EGN3000L — Engineering Design
+            </div>
+          </div>
+          <div
+            class=""
+            style="opacity: 0; transform: translateY(18px); transition: opacity 0.5s ease, transform 0.5s ease;"
+          >
+            <div
+              style="font-size: 40px; font-weight: 800; color: rgb(255, 255, 255); line-height: 1.2; margin-bottom: 12px;"
+            >
+              Customer Needs &
+              <br />
+              Weighted Benefit Analysis
+            </div>
+          </div>
+          <div
+            class=""
+            style="opacity: 0; transform: translateY(18px); transition: opacity 0.5s ease, transform 0.5s ease;"
+          >
+            <div
+              style="font-size: 18px; color: rgba(255, 255, 255, 0.7); max-width: 500px; line-height: 1.5;"
+            >
+              How to figure out what matters most — and use it to pick your best design.
+            </div>
+          </div>
+          <div
+            class=""
+            style="opacity: 0; transform: translateY(18px); transition: opacity 0.5s ease, transform 0.5s ease;"
+          >
+            <div
+              style="margin-top: 32px; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;"
+            >
+              <div
+                style="background: rgba(255, 255, 255, 0.12); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: rgba(255, 255, 255, 0.85); font-weight: 500;"
+              >
+                Step 1: Identify Needs
+              </div>
+              <div
+                style="background: rgba(255, 255, 255, 0.12); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: rgba(255, 255, 255, 0.85); font-weight: 500;"
+              >
+                Step 2: Weigh Them
+              </div>
+              <div
+                style="background: rgba(255, 255, 255, 0.12); border-radius: 20px; padding: 6px 16px; font-size: 13px; color: rgba(255, 255, 255, 0.85); font-weight: 500;"
+              >
+                Step 3: Build the WBA
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      style="display: flex; align-items: center; justify-content: space-between; padding: 12px 24px; background: rgb(255, 255, 255); border-top: 1px solid rgb(226, 232, 240); flex-shrink: 0;"
+    >
+      <button
+        disabled=""
+        style="padding: 8px 20px; border-radius: 8px; border: 1px solid rgb(0, 103, 71); background: transparent; color: rgb(0, 103, 71); font-weight: 600; font-size: 14px; cursor: not-allowed; opacity: 0.4; transition: opacity 0.2s; flex-shrink: 0;"
+      >
+        ← Previous
+      </button>
+      <div
+        style="font-size: 14px; font-weight: 600; color: rgb(26, 35, 50);"
+      >
+        Title
+      </div>
+      <button
+        style="padding: 8px 20px; border-radius: 8px; border: medium; background: rgb(0, 103, 71); color: rgb(255, 255, 255); font-weight: 600; font-size: 14px; cursor: pointer; transition: background 0.2s; flex-shrink: 0;"
+      >
+        Next →
+      </button>
+    </div>
+  </div>
+</div>
+`;
