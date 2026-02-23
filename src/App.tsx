@@ -1,3 +1,10 @@
+/**
+ * Root application component.
+ *
+ * Renders a single-page slide deck with keyboard, swipe, and button
+ * navigation. The currently-visible slide is tracked in local state
+ * and rendered from the {@link slideComponents} lookup table.
+ */
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useIsMobile } from "./hooks/useIsMobile";
 import { slides, slideNames, TEAL, DARK, WHITE } from "./constants/theme";
@@ -13,6 +20,10 @@ import { WBAPracticeSlide } from "./components/slides/WBAPracticeSlide";
 import { KeyTakeawaysSlide } from "./components/slides/KeyTakeawaysSlide";
 import { Mascot } from "./components/Mascot";
 
+/**
+ * Maps each slide `type` string (from `theme.slides`) to the React
+ * component responsible for rendering that slide's content.
+ */
 const slideComponents = {
   title: TitleSlide,
   "what-are-cn": WhatAreCNSlide,
@@ -26,6 +37,7 @@ const slideComponents = {
   "key-takeaways": KeyTakeawaysSlide,
 };
 
+/** Union of valid slide type strings derived from {@link slideComponents}. */
 type SlideType = keyof typeof slideComponents;
 
 export default function App() {
@@ -34,6 +46,12 @@ export default function App() {
   const [animKey, setAnimKey] = useState(0);
   const slideAreaRef = useRef<HTMLDivElement>(null);
 
+  /**
+   * Navigate to a specific slide index.
+   * Blurs the active element first so focus outlines don't persist
+   * across slides, then bumps `animKey` to re-trigger the entrance
+   * animation.
+   */
   const goTo = useCallback((idx: number) => {
     if (idx >= 0 && idx < slides.length) {
       const activeElement = document.activeElement;
@@ -45,9 +63,11 @@ export default function App() {
     }
   }, []);
 
+  /** Resolve the React component for the current slide. */
   const SlideComponent =
     slideComponents[slides[currentSlide].type as SlideType];
 
+  /** Keyboard navigation: ArrowRight / Space = next, ArrowLeft = prev. */
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if ((e.target as HTMLElement)?.tagName === "INPUT") return;
@@ -64,9 +84,9 @@ export default function App() {
     return () => window.removeEventListener("keydown", handler);
   }, [currentSlide, goTo]);
 
+  /** Scroll both the window and the slide container to the top on slide change. */
   useEffect(() => {
     requestAnimationFrame(() => {
-      window.scrollTo({ top: 0, behavior: "auto" });
       slideAreaRef.current?.scrollTo({ top: 0, behavior: "auto" });
     });
   }, [currentSlide]);
@@ -95,6 +115,7 @@ export default function App() {
     };
   }, [currentSlide, goTo]);
 
+  /** Horizontal progress percentage for the top bar. */
   const progressPercent = ((currentSlide + 1) / slides.length) * 100;
 
   return (

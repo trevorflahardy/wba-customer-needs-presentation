@@ -1,7 +1,18 @@
+/**
+ * Rocky the Bull — an animated SVG mascot inspired by USF’s
+ * Rocky mascot, rendered in a Duolingo-style cartoon aesthetic.
+ *
+ * The mascot appears in the bottom-right corner on most slides,
+ * displays contextual tips in a speech bubble, and responds with
+ * mood-specific facial expressions (happy, wink, thinking, excited,
+ * cool, surprised). Students can tap the bubble to cycle tips or
+ * click the bull to dismiss.
+ */
 import { useState, useEffect, useCallback } from "react";
 import { WHITE, DARK, TEAL } from "../constants/theme";
 
-/* ── Show mascot on most slides (skip only cn-examples and cn-table) ── */
+/** Slide types where the mascot should appear. Excluded slides are too
+ *  content-dense for an overlay (e.g. tables and example grids). */
 const MASCOT_SLIDES = new Set([
   "title",
   "what-are-cn",
@@ -13,6 +24,7 @@ const MASCOT_SLIDES = new Set([
   "key-takeaways",
 ]);
 
+/** Per-slide tip messages the mascot cycles through. */
 const MASCOT_TIPS: Record<string, string[]> = {
   title: [
     "Hey! I'm Rocky — your WBA guide. Let's do this!",
@@ -49,8 +61,17 @@ const MASCOT_TIPS: Record<string, string[]> = {
 };
 
 /* ── Cute SVG Rocky the Bull — USF gray bull, Duolingo-style ── */
+
+/** Available facial expression moods for the bull SVG. */
 type Mood = "happy" | "wink" | "thinking" | "excited" | "cool" | "surprised";
 
+/**
+ * Inline SVG of Rocky the Bull’s face.
+ *
+ * All geometry is computed relative to the `size` prop so the
+ * illustration scales cleanly at any resolution. Mood determines
+ * eye style, eyebrow angle, and mouth shape.
+ */
 function BullFace({ mood, size = 56 }: { mood: Mood; size?: number }) {
   const s = size;
   const cx = s / 2;
@@ -253,6 +274,7 @@ function BullFace({ mood, size = 56 }: { mood: Mood; size?: number }) {
   );
 }
 
+/** Maps slide types to the mood Rocky should display on that slide. */
 const SLIDE_MOODS: Record<string, Mood> = {
   title: "happy",
   "what-are-cn": "thinking",
@@ -264,11 +286,20 @@ const SLIDE_MOODS: Record<string, Mood> = {
   "key-takeaways": "happy",
 };
 
+/** Props accepted by the {@link Mascot} component. */
 interface MascotProps {
+  /** Current slide `type` string from the theme config. */
   slideType: string;
+  /** Zero-based index of the current slide (reserved for future use). */
   slideIndex: number;
 }
 
+/**
+ * Fixed-position mascot overlay.
+ *
+ * Shows in the bottom-right corner after a 1 s delay, displays a
+ * speech bubble with tips, and can be dismissed by the student.
+ */
 export function Mascot({ slideType }: MascotProps) {
   const [visible, setVisible] = useState(false);
   const [dismissed, setDismissed] = useState(false);

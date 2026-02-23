@@ -1,3 +1,20 @@
+/**
+ * **Slide 9 — Practice Quiz.**
+ *
+ * A multi-stage interactive quiz that walks students through building
+ * a WBA from scratch:
+ *
+ * 1. **Stage 0** — Name student-generated concepts (free-text input).
+ * 2. **Stage 1** — Assign 1–10 weights to five customer needs.
+ * 3. **Stage 2** — Score each concept against every need, building the
+ *    full WBA grid.
+ * 4. **Stage 3** — Review the completed WBA, see the computed winner,
+ *    and celebrate with confetti.
+ *
+ * All practice data (needs, reference weights, reference scores) is
+ * randomly generated on mount via {@link generatePracticeData} to keep
+ * the exercise fresh on every visit.
+ */
 import { useState, useCallback, useMemo } from "react";
 import { useIsMobile } from "../../hooks/useIsMobile";
 import { FadeIn } from "../FadeIn";
@@ -6,6 +23,11 @@ import { TEAL, TEAL_LIGHT, GOLD, DARK, WHITE } from "../../constants/theme";
 
 /* ── helpers ───────────────────────────────────────────── */
 
+/**
+ * Generates a randomised practice dataset with five customer needs,
+ * sample weights, and three candidate design rows with pre-filled
+ * scores. Called once when the slide mounts.
+ */
 function generatePracticeData() {
   const rand = (min: number, max: number) =>
     Math.floor(Math.random() * (max - min + 1)) + min;

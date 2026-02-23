@@ -1,3 +1,10 @@
+/**
+ * **Slide 2 — What Are Customer Needs?**
+ *
+ * Introduces the concept of customer needs with a definition callout,
+ * explanatory paragraph, and three property cards (Specific, Weighted,
+ * Measurable) that lift on hover.
+ */
 import { useIsMobile } from "../../hooks/useIsMobile";
 import { FadeIn } from "../FadeIn";
 import { TEAL, TEAL_LIGHT, GOLD, DARK, WHITE } from "../../constants/theme";

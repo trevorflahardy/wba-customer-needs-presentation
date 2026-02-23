@@ -1,3 +1,11 @@
+/**
+ * **Slide 5 — Customer Needs Table.**
+ *
+ * Presents a placeholder table with anonymous customer needs (CN₁–CN₅),
+ * generic weights (W₁–W₅), and justification template sentences.
+ * A warning callout emphasises the requirement to justify every weight.
+ * Bottom cards describe what makes a good justification.
+ */
 import { useIsMobile } from "../../hooks/useIsMobile";
 import { FadeIn } from "../FadeIn";
 import { TEAL, TEAL_LIGHT, GOLD, DARK, GRAY_BG, WHITE } from "../../constants/theme";

@@ -1,3 +1,14 @@
+/**
+ * **Slide 8 — WBA Example.**
+ *
+ * Renders a fully worked-out WBA table with 5 designs × 5 anonymous
+ * customer needs. Hovering a column highlights the corresponding
+ * need across every row. The design with the highest weighted total
+ * is flagged with a trophy emoji and a green row background.
+ *
+ * A secondary section explains what "candidate designs" means and
+ * where they come from in the design process.
+ */
 import { useState } from "react";
 import { useIsMobile } from "../../hooks/useIsMobile";
 import { FadeIn } from "../FadeIn";

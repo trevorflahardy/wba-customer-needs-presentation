@@ -1,5 +1,16 @@
+/**
+ * Canvas-free confetti burst effect.
+ *
+ * When `trigger` transitions to a truthy value, 150 coloured particles
+ * are spawned from the top-left area of the component and animated
+ * outward with gravity and friction via `requestAnimationFrame`.
+ * Particles fade out over the given `duration` (default 2 000 ms).
+ *
+ * Used on the Practice Quiz and Key Takeaways slides to celebrate
+ * correct answers and completion.
+ */
 import { useEffect, useState, useRef } from "react";
-
+/** Particle shape and physics state for one confetti piece. */
 interface Particle {
   id: number;
   x: number;
@@ -14,6 +25,7 @@ interface Particle {
   opacity: number;
 }
 
+/** Palette of confetti colours — includes USF brand green and gold. */
 const COLORS = [
   "#22c55e",
   "#fbbf24",
@@ -27,6 +39,7 @@ const COLORS = [
   "#C5960C",
 ];
 
+/** Spawn `count` particles radiating outward from (`originX`, `originY`). */
 function createParticles(count: number, originX: number, originY: number): Particle[] {
   return Array.from({ length: count }, (_, i) => {
     const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.8;

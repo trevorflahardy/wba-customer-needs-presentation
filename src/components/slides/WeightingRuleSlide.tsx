@@ -1,3 +1,11 @@
+/**
+ * **Slide 4 — The Weighting Rule.**
+ *
+ * Explains the 1–10 importance rating with a prominent rule card,
+ * an animated horizontal bar chart showing example weights, and
+ * side-panel guidance tips. An "Example Only" badge prevents students
+ * from treating the sample weights as canonical.
+ */
 import { useState, useEffect } from "react";
 import { useIsMobile } from "../../hooks/useIsMobile";
 import { FadeIn } from "../FadeIn";

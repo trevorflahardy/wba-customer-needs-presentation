@@ -1,3 +1,10 @@
+/**
+ * **Slide 7 — WBA Steps.**
+ *
+ * Walks through the five-step WBA construction process in a numbered
+ * stagger list, then presents the "Total = Σ (Wᵢ × Sᵢ)" equation in
+ * a dark gradient card with a variable legend underneath.
+ */
 import { useIsMobile } from "../../hooks/useIsMobile";
 import { FadeIn } from "../FadeIn";
 import { StaggerList } from "../StaggerList";

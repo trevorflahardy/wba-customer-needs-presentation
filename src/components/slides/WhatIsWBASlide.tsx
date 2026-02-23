@@ -1,3 +1,10 @@
+/**
+ * **Slide 6 — What Is a WBA?**
+ *
+ * Defines Weighted Benefit Analysis (a.k.a. Pugh Chart) with a hero
+ * callout, then shows a three-step flow: Customer Needs Table → WBA
+ * Matrix → Best Design, connected by animated arrows.
+ */
 import { useIsMobile } from "../../hooks/useIsMobile";
 import { FadeIn } from "../FadeIn";
 import { TEAL, TEAL_LIGHT, GOLD, DARK, WHITE } from "../../constants/theme";

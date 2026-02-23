@@ -1,3 +1,11 @@
+/**
+ * **Slide 10 — Key Takeaways.**
+ *
+ * Five summary cards covering the essential lessons: identify needs,
+ * weight them, build the WBA, compute scores, and remember the WBA
+ * is a tool. A graduation-cap banner at the bottom congratulates
+ * the student.
+ */
 import { useIsMobile } from "../../hooks/useIsMobile";
 import { FadeIn } from "../FadeIn";
 import { TEAL, GOLD, DARK, WHITE } from "../../constants/theme";

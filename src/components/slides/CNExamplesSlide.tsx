@@ -1,3 +1,11 @@
+/**
+ * **Slide 3 — Customer Needs Examples.**
+ *
+ * Shows six anonymous placeholder cards (CN₁–CN₆) with a dashed-border
+ * "your need goes here" style, plus a hint banner explaining that these
+ * are placeholders. A bottom section covers how to identify needs
+ * (stakeholders, requirements, engineering judgment).
+ */
 import { useIsMobile } from "../../hooks/useIsMobile";
 import { FadeIn } from "../FadeIn";
 import { TEAL, TEAL_LIGHT, GOLD, DARK, WHITE } from "../../constants/theme";

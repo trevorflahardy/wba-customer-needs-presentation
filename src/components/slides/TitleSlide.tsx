@@ -1,3 +1,10 @@
+/**
+ * **Slide 1 — Title.**
+ *
+ * Full-bleed gradient hero card showing the course name (EGN 3000L),
+ * presentation title, tagline, and three step-preview badges.
+ * Decorative circles and a gold shimmer edge add visual flair.
+ */
 import { useIsMobile } from "../../hooks/useIsMobile";
 import { FadeIn } from "../FadeIn";
 import { DARK, TEAL, GOLD, WHITE } from "../../constants/theme";
