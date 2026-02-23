@@ -53,7 +53,7 @@ export function WhatAreCNSlide() {
             }}
           >
             In your robot project, those stakeholders are{" "}
-            <strong>K-12 students</strong> and <strong>your professor</strong>. Their
+            <strong>K-8 students</strong> and <strong>your professor</strong>. Their
             wants and expectations drive your design decisions.
           </div>
         </div>
