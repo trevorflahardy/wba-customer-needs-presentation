@@ -10,11 +10,11 @@ export function WBAExampleSlide() {
   const weights = ["W₁", "W₂", "W₃", "W₄", "W₅"];
   const weightVals = [8, 6, 7, 9, 5];
   const designs = [
-    { name: "D₁", scores: [7, 5, 8, 6, 9] },
-    { name: "D₂", scores: [6, 8, 5, 7, 4] },
-    { name: "D₃", scores: [9, 4, 6, 8, 7] },
-    { name: "D₄", scores: [5, 9, 7, 4, 8] },
-    { name: "D₅", scores: [8, 7, 9, 5, 6] },
+    { name: "Design A", scores: [7, 5, 8, 6, 9] },
+    { name: "Design B", scores: [6, 8, 5, 7, 4] },
+    { name: "Design C", scores: [9, 4, 6, 8, 7] },
+    { name: "Design D", scores: [5, 9, 7, 4, 8] },
+    { name: "Design E", scores: [8, 7, 9, 5, 6] },
   ];
   const calcTotal = (scores: number[]) =>
     scores.reduce((sum: number, s: number, i: number) => sum + s * weightVals[i], 0);

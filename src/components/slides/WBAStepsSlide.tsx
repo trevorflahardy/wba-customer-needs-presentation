@@ -48,7 +48,7 @@ export function WBAStepsSlide() {
             <strong style={{ color: TEAL }}>
               List your candidate designs
             </strong>{" "}
-            (D₁, D₂, D₃, …) as rows. You need at least 2 designs to compare.
+            (Design A, Design B, Design C, …) as rows. You need at least 2 designs to compare.
           </span>,
           <span>
             <strong style={{ color: TEAL }}>Score each design</strong> on
